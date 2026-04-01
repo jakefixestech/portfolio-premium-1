@@ -1,0 +1,435 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const recentNews = [
+  {
+    date: '2025-10-08',
+    dateDisplay: 'October 8, 2025',
+    title: 'Littleton Farmers Market Celebrates Record Season',
+    excerpt: 'Local vendors report the highest attendance in the market\'s 15-year history. Plans are underway for expanded offerings next summer.',
+    slug: 'farmers-market-record-season',
+  },
+  {
+    date: '2025-10-05',
+    dateDisplay: 'October 5, 2025',
+    title: 'Ammonoosuc Rail Trail Maintenance Complete',
+    excerpt: 'Trail resurfacing and new signage installed along the 5-mile section. The trail is now fully open to hikers and cyclists.',
+    slug: 'rail-trail-maintenance',
+  },
+  {
+    date: '2025-09-28',
+    dateDisplay: 'September 28, 2025',
+    title: 'Town Budget Approved for Fiscal Year 2026',
+    excerpt: 'Selectboard approves $12.4 million budget with investments in road infrastructure and public safety equipment.',
+    slug: 'budget-approved-fy2026',
+  },
+  {
+    date: '2025-09-22',
+    dateDisplay: 'September 22, 2025',
+    title: 'Recycling Center Announces Extended Winter Hours',
+    excerpt: 'Saturday hours extended through March to accommodate resident demand. New electronics recycling program also launching.',
+    slug: 'recycling-center-winter-hours',
+  },
+  {
+    date: '2025-09-15',
+    dateDisplay: 'September 15, 2025',
+    title: 'Main Street Paving Project Ahead of Schedule',
+    excerpt: 'Contractors report the downtown repaving will finish two weeks early. Final striping expected by month\'s end.',
+    slug: 'main-street-paving',
+  },
+  {
+    date: '2025-09-10',
+    dateDisplay: 'September 10, 2025',
+    title: 'Library Launches Free Computer Skills Program',
+    excerpt: 'Weekly classes now available for seniors and beginners. Topics include email, internet safety, and video calling.',
+    slug: 'library-computer-program',
+  },
+];
+
+const publicNotices = [
+  {
+    title: 'Public Hearing: Zoning Amendment Proposal',
+    date: '2025-10-20',
+    dateDisplay: 'October 20, 2025',
+    description: 'The Planning Board will hold a public hearing on proposed amendments to residential zoning districts.',
+    slug: 'zoning-amendment-hearing',
+  },
+  {
+    title: 'Selectboard Meeting Agenda Posted',
+    date: '2025-10-18',
+    dateDisplay: 'October 18, 2025',
+    description: 'Agenda for the October 21st Selectboard meeting is now available for public review.',
+    slug: 'selectboard-agenda-oct21',
+  },
+  {
+    title: 'Temporary Road Closure: Elm Street',
+    date: '2025-10-16',
+    dateDisplay: 'October 16, 2025',
+    description: 'Elm Street between Main and Oak will be closed October 22-24 for culvert replacement.',
+    slug: 'elm-street-closure',
+  },
+  {
+    title: 'Water Main Flushing Schedule',
+    date: '2025-10-14',
+    dateDisplay: 'October 14, 2025',
+    description: 'Annual water main flushing begins October 28th. Residents may experience temporary discoloration.',
+    slug: 'water-main-flushing',
+  },
+];
+---
+
+<BaseLayout title="News & Announcements | Town of Littleton, NH" description="Stay up to date with the latest news, public notices, and announcements from the Town of Littleton, New Hampshire.">
+
+  <!-- Page Hero -->
+  <section class="hero-section" aria-labelledby="page-title">
+    <div class="container">
+      <h1 id="page-title">News &amp; Announcements</h1>
+      <p class="hero-subtitle">
+        Stay up to date with the latest news, public notices, and announcements from the Town of Littleton.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Article -->
+  <section class="featured-section" aria-labelledby="featured-heading">
+    <div class="container">
+      <article class="featured-card">
+        <span class="featured-badge">Featured</span>
+        <h2 id="featured-heading">Community Center Renovation Enters Final Phase</h2>
+        <time datetime="2025-10-15" class="featured-date">October 15, 2025</time>
+        <p class="featured-excerpt">
+          The long-awaited Littleton Community Center renovation project has officially entered its final phase,
+          with contractors focusing on interior finishing work and accessibility improvements. Town officials
+          anticipate the fully renovated facility will open to the public by mid-December, just in time for
+          winter programming. The $2.3 million project includes a new gymnasium floor, expanded meeting rooms,
+          and upgraded HVAC systems throughout the building.
+        </p>
+        <a
+          href="/news/community-center-renovation"
+          class="read-more-link"
+          aria-label="Read full story about Community Center Renovation"
+        >
+          Read Full Story <span aria-hidden="true">→</span>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- News Grid -->
+  <section class="news-grid-section" aria-labelledby="recent-news-heading">
+    <div class="container">
+      <h2 id="recent-news-heading">Recent News</h2>
+      <div class="news-grid">
+        {recentNews.map((article) => (
+          <article class="news-card">
+            <time datetime={article.date} class="news-date">{article.dateDisplay}</time>
+            <h3>{article.title}</h3>
+            <p>{article.excerpt}</p>
+            <a
+              href={`/news/${article.slug}`}
+              class="read-more-link"
+              aria-label={`Read more about ${article.title}`}
+            >
+              Read More <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Public Notices -->
+  <section class="notices-section" aria-labelledby="notices-heading">
+    <div class="container">
+      <h2 id="notices-heading">Public Notices</h2>
+      <ul class="notices-list">
+        {publicNotices.map((notice) => (
+          <li class="notice-item">
+            <div class="notice-content">
+              <h3>{notice.title}</h3>
+              <time datetime={notice.date} class="notice-date">{notice.dateDisplay}</time>
+              <p>{notice.description}</p>
+              <a
+                href={`/news/notices/${notice.slug}`}
+                class="read-more-link"
+                aria-label={`View notice: ${notice.title}`}
+              >
+                View Notice <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="newsletter-section" aria-labelledby="newsletter-heading">
+    <div class="container">
+      <h2 id="newsletter-heading">Stay Connected</h2>
+      <p class="newsletter-text">
+        Subscribe to receive news, announcements, and public notices directly in your inbox.
+      </p>
+      <form class="newsletter-form" action="#" method="post">
+        <label for="newsletter-email" class="newsletter-label">
+          Email Address <span aria-hidden="true" class="required-star">*</span>
+        </label>
+        <div class="form-row">
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="your.email@example.com"
+            aria-required="true"
+            required
+            autocomplete="email"
+            class="newsletter-input"
+          />
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Hero */
+  .hero-section {
+    background-color: #EEF2F8;
+    padding: 4rem 0;
+    text-align: center;
+  }
+  .hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 1.125rem;
+    color: #1E2D3D;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+  /* Featured */
+  .featured-section {
+    background-color: white;
+    padding: 4rem 0;
+  }
+  .featured-card {
+    border-left: 4px solid #C8973A;
+    padding: 2rem;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+  /* Fixed: navy on gold passes contrast — was white which failed */
+  .featured-badge {
+    display: inline-block;
+    background-color: #C8973A;
+    color: #1B2E4B;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .featured-card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    margin-bottom: 0.5rem;
+  }
+  .featured-date {
+    display: block;
+    font-size: 0.875rem;
+    color: #2C4A7C;
+    margin-bottom: 1rem;
+  }
+  .featured-excerpt {
+    font-size: 1.0625rem;
+    color: #1E2D3D;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Fixed: navy on white/light passes 4.5:1 — was gold which failed */
+  .read-more-link {
+    color: #1B2E4B;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .read-more-link:hover { color: #2C4A7C; }
+  .read-more-link:focus {
+    outline: 2px solid #1B2E4B;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* News Grid */
+  .news-grid-section {
+    background-color: #EEF2F8;
+    padding: 4rem 0;
+  }
+  .news-grid-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .news-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+  .news-date {
+    display: block;
+    font-size: 0.875rem;
+    color: #2C4A7C;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .news-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1B2E4B;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  .news-card p {
+    font-size: 0.9375rem;
+    color: #1E2D3D;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* Public Notices */
+  .notices-section {
+    background-color: white;
+    padding: 4rem 0;
+  }
+  .notices-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .notices-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 50rem;
+  }
+  .notice-item {
+    border-left: 4px solid #C8973A;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .notice-item:last-child { margin-bottom: 0; }
+  .notice-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1B2E4B;
+    margin-bottom: 0.25rem;
+  }
+  .notice-date {
+    display: block;
+    font-size: 0.875rem;
+    color: #2C4A7C;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .notice-content p {
+    font-size: 0.9375rem;
+    color: #1E2D3D;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Newsletter */
+  .newsletter-section {
+    background-color: #1B2E4B;
+    padding: 4rem 0;
+    text-align: center;
+  }
+  .newsletter-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  .newsletter-text {
+    color: white;
+    font-size: 1.0625rem;
+    max-width: 32rem;
+    margin: 0 auto 2rem;
+  }
+  .newsletter-form {
+    max-width: 28rem;
+    margin: 0 auto;
+  }
+  .newsletter-label {
+    display: block;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+  .required-star { color: #fca5a5; }
+  .form-row {
+    display: flex;
+    gap: 0.75rem;
+  }
+  /* Fixed: gold border makes input stand out against navy background */
+  .newsletter-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #C8973A;
+    border-radius: 4px;
+  }
+  .newsletter-input:focus {
+    outline: none;
+    border-color: white;
+  }
+  /* Fixed: navy text on gold passes contrast — was white which failed */
+  .newsletter-button {
+    background-color: #C8973A;
+    color: #1B2E4B;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .newsletter-button:hover { opacity: 0.9; }
+  .newsletter-button:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  /* Responsive */
+  @media (min-width: 640px) {
+    .news-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .news-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero-section h1 { font-size: 3rem; }
+  }
+</style>

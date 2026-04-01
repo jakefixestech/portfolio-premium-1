@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const budgetItems = [
+  { label: 'Total Budget', value: '$12.4 million' },
+  { label: 'General Fund', value: '$8.2 million' },
+  { label: 'Capital Projects', value: '$2.1 million' },
+  { label: 'Water / Sewer', value: '$2.1 million' },
+];
+
+const currentDocs = [
+  { title: 'FY2025 Adopted Budget', size: '2.4MB' },
+  { title: 'FY2025 Budget Presentation', size: '1.1MB' },
+  { title: 'FY2024 Audit Report', size: '1.8MB' },
+  { title: 'FY2024 Annual Report', size: '3.2MB' },
+];
+
+const taxRates = [
+  { category: 'Municipal', rate: '$4.82' },
+  { category: 'County', rate: '$1.23' },
+  { category: 'Local School', rate: '$14.56' },
+  { category: 'State School', rate: '$1.94' },
+];
+
+const archiveDocs = [
+  { title: 'FY2024 Budget', size: '2.2MB' },
+  { title: 'FY2023 Budget', size: '2.1MB' },
+  { title: 'FY2023 Audit', size: '1.6MB' },
+  { title: 'FY2022 Budget', size: '2.0MB' },
+  { title: 'FY2022 Audit', size: '1.5MB' },
+  { title: 'Tax Rate History', size: '0.5MB' },
+];
+---
+
+<BaseLayout title="Budget & Finance | Town of Littleton, NH" description="Financial documents, budget reports, and tax information for the Town of Littleton, New Hampshire.">
+
+  <!-- Hero -->
+  <section aria-labelledby="hero-heading" class="bg-light-blue py-16">
+    <div class="max-w-7xl mx-auto px-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-body-text mb-4 list-none p-0 m-0">
+          <li>
+            <a href="/government" class="hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+              Government
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-navy font-medium">Budget &amp; Finance</li>
+        </ol>
+      </nav>
+      <h2 id="hero-heading" class="text-4xl font-bold text-navy mb-4">Budget &amp; Finance</h2>
+      <p class="text-xl text-body-text max-w-3xl">
+        Financial documents, budget reports, and tax information for the Town of Littleton.
+      </p>
+    </div>
+  </section>
+
+  <!-- Current Budget -->
+  <section aria-labelledby="budget-heading" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="budget-heading" class="text-3xl font-bold text-navy text-center mb-8">FY2025 Operating Budget</h2>
+      <div class="budget-grid">
+        <div>
+          <h3 class="text-xl font-bold text-navy mb-6">Budget Summary</h3>
+          <dl class="space-y-2">
+            {budgetItems.map((item) => (
+              <div class="flex justify-between items-center py-3 border-b border-light-blue">
+                <dt class="text-body-text">{item.label}</dt>
+                <dd class="font-bold text-navy text-lg">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-navy mb-6">Download Budget Documents</h3>
+          <div class="space-y-4">
+            {currentDocs.map((doc) => (
+              <div class="bg-light-blue p-4 rounded-lg flex items-start gap-4">
+                <svg aria-hidden="true" class="w-8 h-8 text-mid-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <div>
+                  <p class="font-semibold text-navy">{doc.title}</p>
+                  <p class="text-sm text-body-text mb-2">PDF, {doc.size}</p>
+                  <a
+                    href="#"
+                    class="text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+                    aria-label={`Download ${doc.title} PDF`}
+                  >
+                    Download PDF <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tax Information -->
+  <section aria-labelledby="tax-heading" class="py-16 bg-light-blue">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="tax-heading" class="text-3xl font-bold text-navy text-center mb-8">Property Tax Information</h2>
+      <div class="budget-grid">
+        <div>
+          <h3 class="text-xl font-bold text-navy mb-6">2025 Tax Rate</h3>
+          <div class="bg-white rounded-lg overflow-hidden">
+            <table class="w-full">
+              <caption class="sr-only">2025 Property Tax Rate Breakdown per $1,000 of assessed value</caption>
+              <thead class="bg-navy text-white">
+                <tr>
+                  <th scope="col" class="text-left py-3 px-4">Category</th>
+                  <th scope="col" class="text-right py-3 px-4">Rate per $1,000</th>
+                </tr>
+              </thead>
+              <tbody>
+                {taxRates.map((row, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-white' : 'bg-light-blue'}>
+                    <td class="py-3 px-4 text-body-text border-b border-light-blue">{row.category}</td>
+                    <td class="py-3 px-4 text-right text-navy border-b border-light-blue">{row.rate}</td>
+                  </tr>
+                ))}
+                <tr class="total-row">
+                  <td class="py-3 px-4 font-bold text-navy">Total</td>
+                  <td class="py-3 px-4 text-right font-bold text-navy text-lg">$22.55</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-navy mb-6">Pay Your Taxes</h3>
+          <div class="bg-white p-6 rounded-lg">
+            <p class="text-body-text mb-6">
+              Property taxes can be paid online, by mail, or in person at Town Hall.
+              The Finance Department accepts cash, check, and credit card payments.
+            </p>
+            <div class="space-y-4">
+              <a
+                href="/services/pay"
+                class="inline-block bg-navy text-white font-semibold px-6 py-3 rounded hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+              >
+                Pay Online <span aria-hidden="true">→</span>
+              </a>
+              <div class="flex flex-col gap-3 mt-2">
+                <a
+                  href="/departments/finance"
+                  class="text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+                >
+                  Tax Due Dates <span aria-hidden="true">→</span>
+                </a>
+                <a
+                  href="/departments/finance"
+                  class="text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+                >
+                  Contact Finance <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documents Archive -->
+  <section aria-labelledby="archive-heading" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="archive-heading" class="text-3xl font-bold text-navy text-center mb-8">Financial Documents Archive</h2>
+      <div class="docs-grid">
+        {archiveDocs.map((doc) => (
+          <div class="archive-card">
+            <svg aria-hidden="true" class="w-10 h-10 text-mid-blue mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3 class="font-bold text-navy mb-2">{doc.title}</h3>
+            <p class="text-sm text-body-text mb-3">PDF, {doc.size}</p>
+            <a
+              href="#"
+              class="text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+              aria-label={`Download ${doc.title} PDF`}
+            >
+              Download PDF <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .budget-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    .budget-grid { grid-template-columns: 1fr; }
+  }
+
+  .total-row {
+    background-color: #2C4A7C;
+  }
+  .total-row td {
+    color: white !important;
+  }
+
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    .docs-grid { grid-template-columns: 1fr; }
+  }
+
+  .archive-card {
+    background: white;
+    border-left: 4px solid #C8973A;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+</style>

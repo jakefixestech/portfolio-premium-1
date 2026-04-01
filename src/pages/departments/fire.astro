@@ -1,0 +1,359 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  { title: 'Fire Suppression', description: 'Rapid response to structure fires, vehicle fires, and wildland fires throughout the region.' },
+  { title: 'Emergency Medical', description: 'Paramedic and EMT services providing advanced life support to the community.' },
+  { title: 'Technical Rescue', description: 'Specialized rescue operations including vehicle extrication and confined space rescue.' },
+  { title: 'Hazmat Response', description: 'Handling hazardous materials incidents to protect public health and the environment.' },
+  { title: 'Fire Prevention', description: 'Inspections, code enforcement, and public education to prevent fires before they start.' },
+  { title: 'Public Education', description: 'Community programs including fire safety training, school visits, and CPR classes.' },
+];
+
+const stats = [
+  { value: '1,200+', label: 'Calls per year' },
+  { value: '24/7', label: 'Staffing' },
+  { value: '30', label: 'Firefighters' },
+  { value: '8', label: 'Apparatus' },
+];
+
+const safetyTips = [
+  'Test smoke detectors monthly and replace batteries twice a year',
+  'Create and practice a home fire escape plan with two exits from every room',
+  'Never leave cooking unattended and keep flammable items away from the stove',
+  'Have chimneys and heating equipment inspected and cleaned annually',
+  'Keep space heaters at least 3 feet away from anything that can burn',
+];
+---
+
+<BaseLayout title="Fire Department | Town of Littleton, NH" description="The Littleton Fire Department provides fire suppression, emergency medical services, and rescue operations to protect our community 24 hours a day.">
+
+  <!-- Emergency Notice -->
+  <div role="region" aria-label="Emergency contact information" class="emergency-banner">
+    <p class="emergency-text">
+      For emergencies call
+      <a href="tel:911" class="emergency-link" aria-label="Call 911 for emergencies">911</a>
+    </p>
+  </div>
+
+  <!-- Hero -->
+  <section aria-labelledby="hero-heading" class="bg-light-blue py-12">
+    <div class="max-w-7xl mx-auto px-8">
+      <nav aria-label="Breadcrumb" class="mb-4">
+        <ol class="flex items-center gap-2 text-sm text-body-text list-none p-0 m-0">
+          <li>
+            <a href="/departments" class="hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+              Departments
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-navy font-medium">Fire Department</li>
+        </ol>
+      </nav>
+      <h1 id="hero-heading" class="text-4xl font-bold text-navy mb-4">Fire Department</h1>
+      <p class="text-lg text-body-text max-w-3xl mb-6">
+        The Littleton Fire Department provides fire suppression, emergency medical services, and rescue operations to protect our community 24 hours a day.
+      </p>
+      <div class="contact-row">
+        <div class="contact-item">
+          <span class="font-bold text-xl emergency-text">EMERGENCY: 911</span>
+        </div>
+        <div class="contact-item">
+          <svg aria-hidden="true" class="w-5 h-5 text-mid-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          </svg>
+          <a href="tel:+16035550105" class="text-navy underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded" aria-label="Call Fire Department non-emergency line at 603-555-0105">
+            (603) 555-0105
+          </a>
+        </div>
+        <div class="contact-item">
+          <svg aria-hidden="true" class="w-5 h-5 text-mid-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <a href="mailto:fire@littletonnh.gov" class="text-navy underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+            fire@littletonnh.gov
+          </a>
+        </div>
+        <div class="contact-item">
+          <svg aria-hidden="true" class="w-5 h-5 text-mid-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="text-body-text">24/7 Emergency Response</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section aria-labelledby="services-heading" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="services-heading" class="text-3xl font-bold text-navy mb-8 text-center">Department Services</h2>
+      <div class="services-grid">
+        {services.map((service) => (
+          <article class="service-card">
+            <h3 class="text-xl font-semibold text-navy mb-2">{service.title}</h3>
+            <p class="text-body-text">{service.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- By the Numbers -->
+  <section aria-labelledby="stats-heading" class="py-16 bg-navy">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="stats-heading" class="text-3xl font-bold text-white mb-8 text-center">By the Numbers</h2>
+      <div class="stats-grid">
+        {stats.map((stat) => (
+          <div class="stat-card">
+            <h3 class="stat-value">{stat.value}</h3>
+            <p class="text-white">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Fire Prevention -->
+  <section aria-labelledby="prevention-heading" class="py-16 bg-light-blue">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="prevention-heading" class="text-3xl font-bold text-navy mb-8 text-center">Fire Prevention &amp; Safety</h2>
+      <div class="prevention-grid">
+
+        <div>
+          <h3 class="text-xl font-semibold text-navy mb-4">Home Safety Tips</h3>
+          <ul class="space-y-3 list-none p-0 m-0">
+            {safetyTips.map((tip) => (
+              <li class="flex items-start gap-3">
+                <svg aria-hidden="true" class="w-5 h-5 text-mid-blue mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span class="text-body-text">{tip}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-xl font-semibold text-navy mb-3">Request a Fire Inspection</h3>
+            <p class="text-body-text mb-4">
+              Property owners and businesses can request a fire safety inspection to ensure compliance with local fire codes and identify potential hazards.
+            </p>
+            <a
+              href="/contact"
+              class="inline-block bg-navy text-white px-6 py-3 rounded font-semibold hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+              aria-label="Request a fire safety inspection"
+            >
+              Request Inspection <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-navy mb-3">Free Smoke Detectors</h3>
+            <p class="text-body-text mb-4">
+              The Littleton Fire Department provides free smoke detectors and installation for residents in need. Contact us to learn if you qualify for this program.
+            </p>
+            <!-- Gold on light-blue background passes contrast — kept as gold -->
+            <a
+              href="tel:+16035550105"
+              class="text-navy font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 rounded"
+              aria-label="Call to learn more about the free smoke detector program"
+            >
+              Call to Learn More <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Hours & Location -->
+  <section aria-labelledby="info-heading" class="bg-white">
+    <h2 id="info-heading" class="sr-only">Station Hours and Location</h2>
+    <div class="info-grid">
+
+      <div>
+        <h3 class="text-2xl font-bold text-navy mb-6">Station Hours</h3>
+        <div class="space-y-4">
+          <div class="hours-card">
+            <h4 class="font-semibold text-navy mb-2">Emergency Response</h4>
+            <p class="text-body-text">24 hours a day, 7 days a week</p>
+          </div>
+          <div class="hours-card">
+            <h4 class="font-semibold text-navy mb-2">Administrative Office</h4>
+            <dl class="text-body-text space-y-1">
+              <div class="flex justify-between">
+                <dt>Monday &ndash; Friday</dt>
+                <dd>8:00 AM &ndash; 4:00 PM</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt>Saturday &ndash; Sunday</dt>
+                <dd>Closed</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-bold text-navy mb-6">Station Location</h3>
+        <address class="not-italic text-body-text mb-4">
+          <p class="font-semibold text-navy">Littleton Fire Station</p>
+          <p>50 Union Street</p>
+          <p>Littleton, NH 03561</p>
+        </address>
+        <div
+          class="bg-gray-200 h-48 rounded-lg flex items-center justify-center"
+          role="img"
+          aria-label="Map showing Fire Station location at 50 Union Street, Littleton NH"
+        >
+          <span class="text-gray-500" aria-hidden="true">Map Placeholder</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Back to Departments -->
+  <section class="bg-light-blue py-8">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <a
+        href="/departments"
+        class="inline-flex items-center gap-2 text-navy font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+      >
+        <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to All Departments
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .emergency-banner {
+    background-color: #FEF2F2;
+    border: 4px solid #DC2626;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .emergency-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #DC2626;
+  }
+
+  .emergency-link {
+    color: #DC2626;
+    text-decoration: underline;
+  }
+  .emergency-link:focus {
+    outline: 2px solid #DC2626;
+    outline-offset: 2px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1E2D3D;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  .service-card {
+    background-color: #EEF2F8;
+    padding: 24px;
+    border-radius: 8px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  /* h3 styled as large gold number — !important overrides any inherited text-navy */
+  .stat-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #C8973A !important;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .prevention-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    .prevention-grid { grid-template-columns: 1fr; }
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 20px;
+  }
+  @media (max-width: 768px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .hours-card {
+    background-color: #EEF2F8;
+    padding: 16px;
+    border-radius: 8px;
+  }
+</style>

@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const departments = [
+  {
+    name: 'Town Clerk',
+    phone: '(603) 555-0101',
+    email: 'clerk@littletonnh.gov',
+    hours: 'Mon–Fri 8:00 AM–4:30 PM',
+  },
+  {
+    name: 'Public Works',
+    phone: '(603) 555-0102',
+    email: 'publicworks@littletonnh.gov',
+    hours: 'Mon–Fri 7:00 AM–3:30 PM',
+  },
+  {
+    name: 'Planning & Zoning',
+    phone: '(603) 555-0103',
+    email: 'planning@littletonnh.gov',
+    hours: 'Mon–Fri 8:00 AM–4:30 PM',
+  },
+  {
+    name: 'Police (Non-Emergency)',
+    phone: '(603) 555-0104',
+    email: 'police@littletonnh.gov',
+    hours: '24/7 Dispatch Available',
+  },
+  {
+    name: 'Fire (Non-Emergency)',
+    phone: '(603) 555-0105',
+    email: 'fire@littletonnh.gov',
+    hours: '24/7 Dispatch Available',
+  },
+  {
+    name: 'Finance',
+    phone: '(603) 555-0106',
+    email: 'finance@littletonnh.gov',
+    hours: 'Mon–Fri 8:00 AM–4:30 PM',
+  },
+];
+
+const subjects = [
+  'General Inquiry',
+  'Town Services',
+  'Permits & Licenses',
+  'Public Works Request',
+  'Meeting Information',
+  'Other',
+];
+---
+
+<BaseLayout title="Contact Us | Town of Littleton, NH" description="Contact the Town of Littleton, NH. Find department phone numbers, email addresses, and send us a message.">
+
+  <!-- Page Hero -->
+  <section class="bg-light-blue py-12 md:py-16" aria-labelledby="contact-hero-heading">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 id="contact-hero-heading" class="text-3xl md:text-4xl font-bold text-navy mb-4">
+        Contact Us
+      </h2>
+      <p class="text-lg text-body-text max-w-2xl mx-auto leading-relaxed">
+        We're here to help. Reach out to Town Hall or find the right department below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Emergency Notice -->
+  <div class="max-w-7xl mx-auto px-4 py-6" role="region" aria-label="Emergency information">
+    <div class="bg-white border-l-4 border-gold p-4 shadow-sm">
+      <p class="text-navy font-medium">
+        <span class="sr-only">Important: </span>
+        <strong>For emergencies, always call </strong>
+        <a href="tel:911" class="underline hover:no-underline focus:outline-2 focus:outline-gold focus:outline-offset-2">911</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content Grid -->
+  <section aria-labelledby="contact-section-heading">
+    <h2 id="contact-section-heading" class="sr-only">Contact Information and Message Form</h2>
+    <div class="contact-grid">
+
+      <!-- Left Column - Town Hall Info -->
+      <div>
+        <h3 class="text-2xl font-bold text-navy mb-6">Town Hall</h3>
+        <div class="space-y-4 mb-8">
+          <div>
+            <p class="font-semibold text-navy">Address</p>
+            <p class="text-body-text">125 Main Street<br />Littleton, NH 03561</p>
+          </div>
+          <div>
+            <p class="font-semibold text-navy">Phone</p>
+            <p class="text-body-text">
+              <a href="tel:+16035550100" class="underline hover:no-underline focus:outline-2 focus:outline-gold focus:outline-offset-2">(603) 555-0100</a>
+            </p>
+          </div>
+          <div>
+            <p class="font-semibold text-navy">Email</p>
+            <p class="text-body-text">
+              <a href="mailto:info@littletonnh.gov" class="underline hover:no-underline focus:outline-2 focus:outline-gold focus:outline-offset-2">info@littletonnh.gov</a>
+            </p>
+          </div>
+          <div>
+            <p class="font-semibold text-navy">Hours</p>
+            <p class="text-body-text">Monday&ndash;Friday<br />8:00 AM&ndash;4:30 PM</p>
+          </div>
+        </div>
+
+        <!-- Map Placeholder -->
+        <div
+          class="bg-gray-200 h-64 flex items-center justify-center"
+          role="img"
+          aria-label="Map showing location of Littleton Town Hall at 125 Main Street"
+        >
+          <p class="text-gray-500 text-sm" aria-hidden="true">Map placeholder</p>
+        </div>
+      </div>
+
+      <!-- Right Column - Contact Form -->
+      <div>
+        <h3 class="text-2xl font-bold text-navy mb-2">Send Us a Message</h3>
+        <p class="text-sm text-body-text mb-6">
+          <span aria-hidden="true">*</span> Required field
+        </p>
+
+        <form action="#" method="post" novalidate aria-label="Contact form" class="space-y-6">
+
+          <div>
+            <label for="full-name" class="block text-sm font-semibold text-navy mb-2">
+              Full Name <span aria-hidden="true" class="text-red-600">*</span>
+            </label>
+            <input
+              type="text"
+              id="full-name"
+              name="full-name"
+              required
+              aria-required="true"
+              autocomplete="name"
+              class="w-full px-4 py-3 border border-gray-300 focus:border-mid-blue focus:outline-none focus:ring-2 focus:ring-mid-blue"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-semibold text-navy mb-2">
+              Email Address <span aria-hidden="true" class="text-red-600">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              aria-required="true"
+              autocomplete="email"
+              class="w-full px-4 py-3 border border-gray-300 focus:border-mid-blue focus:outline-none focus:ring-2 focus:ring-mid-blue"
+            />
+          </div>
+
+          <div>
+            <label for="subject" class="block text-sm font-semibold text-navy mb-2">
+              Subject <span aria-hidden="true" class="text-red-600">*</span>
+            </label>
+            <select
+              id="subject"
+              name="subject"
+              required
+              aria-required="true"
+              class="w-full px-4 py-3 border border-gray-300 focus:border-mid-blue focus:outline-none focus:ring-2 focus:ring-mid-blue bg-white"
+            >
+              <option value="">Select a subject</option>
+              {subjects.map((subject) => (
+                <option value={subject.toLowerCase().replace(/\s+/g, '-')}>{subject}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-semibold text-navy mb-2">
+              Message <span aria-hidden="true" class="text-red-600">*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              aria-required="true"
+              class="w-full px-4 py-3 border border-gray-300 focus:border-mid-blue focus:outline-none focus:ring-2 focus:ring-mid-blue resize-y"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-navy text-white py-3 px-6 font-semibold hover:bg-mid-blue transition-colors focus:outline-2 focus:outline-gold focus:outline-offset-2"
+          >
+            Send Message
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Department Directory -->
+  <section class="bg-light-blue py-12 md:py-16" aria-labelledby="directory-heading">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 id="directory-heading" class="text-2xl md:text-3xl font-bold text-navy text-center mb-8">
+        Department Directory
+      </h2>
+      <div class="department-grid">
+        {departments.map((dept) => (
+          <article class="bg-white p-6 border border-gray-200 rounded">
+            <h3 class="text-lg font-bold text-navy mb-3">{dept.name}</h3>
+            <div class="space-y-2 text-sm">
+              <p class="text-body-text">
+                <span class="font-medium">Phone:</span>{' '}
+                <a
+                  href={`tel:${dept.phone.replace(/[^\d+]/g, '')}`}
+                  class="underline hover:no-underline focus:outline-2 focus:outline-gold focus:outline-offset-2"
+                >
+                  {dept.phone}
+                </a>
+              </p>
+              <p class="text-body-text">
+                <span class="font-medium">Email:</span>{' '}
+                <a
+                  href={`mailto:${dept.email}`}
+                  class="underline hover:no-underline focus:outline-2 focus:outline-gold focus:outline-offset-2"
+                >
+                  {dept.email}
+                </a>
+              </p>
+              <p class="text-body-text">
+                <span class="font-medium">Hours:</span> {dept.hours}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 48px auto;
+    padding: 0 20px;
+  }
+
+  .department-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .department-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

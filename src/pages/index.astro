@@ -1,17 +1,471 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const quickLinks = [
+  { title: 'Pay a Bill', description: 'Property taxes, water bills, and more', href: '/services/pay' },
+  { title: 'Meeting Minutes', description: 'Board and committee records', href: '/government/meeting-minutes' },
+  { title: 'Report a Problem', description: 'Roads, utilities, or concerns', href: '/services/report' },
+  { title: 'Permits & Licenses', description: 'Building, business, and events', href: '/services/permits' },
+];
+
+const departments = [
+  { name: 'Town Clerk', slug: 'town-clerk' },
+  { name: 'Public Works', slug: 'public-works' },
+  { name: 'Planning & Zoning', slug: 'planning-zoning' },
+  { name: 'Police', slug: 'police' },
+  { name: 'Fire', slug: 'fire' },
+  { name: 'Finance', slug: 'finance' },
+  { name: 'Library', slug: 'library' },
+  { name: 'Emergency Management', slug: 'emergency-management' },
+];
+
+const newsArticles = [
+  {
+    date: 'October 15, 2025',
+    datetime: '2025-10-15',
+    title: 'Community Center Renovation Project Moves to Final Phase',
+    excerpt: 'The long-awaited community center renovation is entering its final phase, with new amenities expected to open by December.',
+  },
+  {
+    date: 'October 10, 2025',
+    datetime: '2025-10-10',
+    title: 'Littleton Farmers Market Wraps Up Record Season',
+    excerpt: 'Local vendors celebrate the most successful season yet, with plans already underway for expanded offerings next year.',
+  },
+  {
+    date: 'October 5, 2025',
+    datetime: '2025-10-05',
+    title: 'Town Meeting to Address Winter Preparedness Plans',
+    excerpt: 'Residents are invited to attend the upcoming town meeting to discuss snow removal routes and emergency protocols.',
+  },
+];
+
+const stats = [
+  { value: '6,000', label: 'Residents' },
+  { value: 'Est. 1764', label: 'Founded' },
+  { value: 'White Mountains', label: 'Region' },
+  { value: '4 Seasons', label: 'Of Adventure' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Premium 1 Example Coming Soon, 30 page build.</h1>
-	</body>
-</html>
+<BaseLayout title="Town of Littleton, NH | Official Municipal Website">
+
+  <!-- Hero — Split Layout -->
+  <section class="hero-split" aria-labelledby="hero-heading">
+    <div class="hero-photo-side">
+      <img
+        src="/hero.jpeg"
+        alt="Littleton, New Hampshire — the red mill building and Ammonoosuc River in autumn"
+        width="1200"
+        height="800"
+        fetchpriority="high"
+        decoding="async"
+        class="hero-photo"
+      />
+    </div>
+    <div class="hero-text-side">
+      <div class="hero-text-inner">
+        <p class="hero-eyebrow">Official Municipal Website</p>
+        <h1 id="hero-heading" class="hero-heading">Welcome Home to Littleton</h1>
+        <p class="hero-subtext">
+          Nestled in the White Mountains, Littleton is a vibrant community with small-town warmth and year-round adventure.
+        </p>
+        <div class="hero-buttons">
+          <a href="/services" class="hero-btn-primary">Explore Town Services</a>
+          <a href="/about" class="hero-btn-secondary">Plan Your Visit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="py-12 bg-white" aria-labelledby="quick-links-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="quick-links-heading" class="sr-only">Quick Links</h2>
+      <div class="quick-links-grid">
+        {quickLinks.map((link) => (
+          <a href={link.href} class="quick-link-card">
+            <h3 class="text-lg font-bold mb-2" style="color:#1B2E4B;">{link.title}</h3>
+            <p class="text-sm" style="color:#374151;">{link.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcement Banner -->
+  <!-- Gold on navy text passes contrast — no change needed here -->
+  <section class="py-4" style="background:#C8973A;" aria-labelledby="announcement-heading">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="font-medium text-center sm:text-left" style="color:#1B2E4B;">
+        <span id="announcement-heading" class="font-bold">Fall 2025</span> — Road construction on Route 116 begins October 1.
+      </p>
+      <a href="/news" class="font-semibold hover:underline whitespace-nowrap rounded" style="color:#1B2E4B;">
+        View all notices <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Departments -->
+  <section style="background:#1B2E4B;" class="py-12" aria-labelledby="departments-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="departments-heading" class="text-3xl font-bold text-white text-center mb-8">
+        Town Departments
+      </h2>
+      <nav aria-label="Town departments">
+        <div class="departments-grid">
+          {departments.map((dept) => (
+            <a href={`/departments/${dept.slug}`} class="dept-link">
+              {dept.name}
+            </a>
+          ))}
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <!-- News -->
+  <section style="background:#EEF2F8;" class="py-12" aria-labelledby="news-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="news-heading" class="text-3xl font-bold text-center mb-8" style="color:#1B2E4B;">
+        Latest News
+      </h2>
+      <div class="news-grid">
+        {newsArticles.map((article) => (
+          <article class="bg-white p-6 border border-gray-200 rounded hover:shadow-lg transition-shadow">
+            <p class="text-sm font-medium mb-2" style="color:#2C4A7C;">
+              <time datetime={article.datetime}>{article.date}</time>
+            </p>
+            <h3 class="text-lg font-bold mb-3" style="color:#1B2E4B;">{article.title}</h3>
+            <p class="text-sm mb-4 leading-relaxed" style="color:#374151;">{article.excerpt}</p>
+          </article>
+        ))}
+      </div>
+      <div class="text-center mt-8">
+        <a href="/news" class="news-btn">
+          View All News <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community Stats -->
+  <section class="bg-white py-12" aria-labelledby="stats-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="stats-heading" class="sr-only">Community Facts</h2>
+      <div class="stats-grid">
+        {stats.map((stat) => (
+          <div class="text-center p-6 border border-gray-200 rounded">
+            <div class="text-4xl font-bold mb-2" style="color:#1B2E4B;">{stat.value}</div>
+            <div class="stat-label">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet Your Government CTA -->
+  <section style="background:#EEF2F8;" class="py-12" aria-labelledby="officials-cta-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <div class="officials-cta">
+        <div>
+          <h2 id="officials-cta-heading" class="text-2xl font-bold mb-2" style="color:#1B2E4B;">
+            Meet Your Local Government
+          </h2>
+          <p style="color:#374151;">
+            Get to know your elected officials, board members, and department heads who serve the Town of Littleton.
+          </p>
+        </div>
+        <div class="cta-buttons">
+          <a href="/about/officials" class="cta-btn-primary">
+            Officials &amp; Staff Directory <span aria-hidden="true">→</span>
+          </a>
+          <a href="/government/selectboard" class="cta-btn-secondary">
+            Selectboard <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Hero Split */
+  .hero-split {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    min-height: 480px;
+  }
+
+  .hero-photo-side {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-text-side {
+    background: #1B2E4B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    position: relative;
+  }
+
+  .hero-text-side::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    /* Gold on navy — passes contrast fine */
+    background: #C8973A;
+  }
+
+  .hero-text-inner { max-width: 360px; }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    /* Gold on navy — passes contrast fine */
+    color: #C8973A;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtext {
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hero-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Gold on navy — passes contrast fine */
+    background: #C8973A;
+    color: #1B2E4B;
+    font-weight: 700;
+    padding: 0.875rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: opacity 0.2s;
+  }
+  .hero-btn-primary:hover { opacity: 0.9; }
+  .hero-btn-primary:focus { outline: 2px solid #C8973A; outline-offset: 2px; }
+
+  .hero-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .hero-btn-secondary:hover { border-color: white; background: rgba(255,255,255,0.08); }
+  .hero-btn-secondary:focus { outline: 2px solid white; outline-offset: 2px; }
+
+  @media (max-width: 768px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+      grid-template-rows: 280px auto;
+    }
+    .hero-text-side::before {
+      left: 0; right: 0; top: 0; bottom: auto;
+      width: auto; height: 4px;
+    }
+    .hero-heading { font-size: 1.75rem; }
+    .hero-text-inner { max-width: 100%; }
+  }
+
+  /* Quick Links */
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .quick-links-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .quick-links-grid { grid-template-columns: 1fr; } }
+
+  .quick-link-card {
+    display: block;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #2C4A7C;
+    border-radius: 4px;
+    padding: 24px;
+    text-decoration: none;
+    transition: box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .quick-link-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .quick-link-card:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
+
+  /* Departments */
+  .departments-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .departments-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .departments-grid { grid-template-columns: 1fr; } }
+
+  .dept-link {
+    display: block;
+    padding: 16px 12px;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: background-color 0.2s;
+  }
+  .dept-link:hover { background-color: rgba(255,255,255,0.22); }
+  .dept-link:focus { outline: 2px solid #C8973A; outline-offset: 2px; }
+
+  /* News */
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } }
+
+ 
+
+  .news-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #1B2E4B;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .news-btn:hover { opacity: 0.9; }
+  .news-btn:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
+
+  .stat-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #2C4A7C;
+  }
+
+  /* Officials CTA */
+  .officials-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    background: white;
+    border-radius: 12px;
+    padding: 32px 40px;
+    border-left: 6px solid #C8973A;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  @media (max-width: 768px) {
+    .officials-cta { flex-direction: column; align-items: flex-start; }
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .cta-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #1B2E4B;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .cta-btn-primary:hover { opacity: 0.9; }
+  .cta-btn-primary:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
+
+  .cta-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: white;
+    color: #1B2E4B;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #1B2E4B;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+  }
+  .cta-btn-secondary:hover { opacity: 0.9; }
+  .cta-btn-secondary:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
+</style>

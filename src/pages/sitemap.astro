@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const siteMapGroups = [
+  {
+    title: 'Main Pages',
+    links: [
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about' },
+      { name: 'Contact Us', href: '/contact' },
+      { name: 'Accessibility', href: '/accessibility' },
+      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'Site Map', href: '/sitemap' },
+    ],
+  },
+  {
+    title: 'Government',
+    links: [
+      { name: 'Government Hub', href: '/government' },
+      { name: 'Selectboard', href: '/government/selectboard' },
+      { name: 'Meeting Minutes', href: '/government/meeting-minutes' },
+      { name: 'Budget & Finance', href: '/government/budget' },
+      { name: 'Town Charter', href: '/government/charter' },
+      { name: 'Annual Reports', href: '/government/annual-reports' },
+    ],
+  },
+  {
+    title: 'Departments',
+    links: [
+      { name: 'Departments Index', href: '/departments' },
+      { name: 'Town Clerk', href: '/departments/town-clerk' },
+      { name: 'Public Works', href: '/departments/public-works' },
+      { name: 'Planning & Zoning', href: '/departments/planning-zoning' },
+      { name: 'Police Department', href: '/departments/police' },
+      { name: 'Fire Department', href: '/departments/fire' },
+      { name: 'Finance', href: '/departments/finance' },
+      { name: 'Library', href: '/departments/library' },
+      { name: 'Emergency Management', href: '/departments/emergency-management' },
+    ],
+  },
+  {
+    title: 'Resident Services',
+    links: [
+      { name: 'Services Hub', href: '/services' },
+      { name: 'Pay a Bill', href: '/services/pay' },
+      { name: 'Permits & Licenses', href: '/services/permits' },
+      { name: 'Report a Problem', href: '/services/report' },
+      { name: 'Public Records', href: '/services/public-records' },
+      { name: 'Voting & Elections', href: '/services/voting' },
+      { name: 'Trash & Recycling', href: '/services/trash' },
+    ],
+  },
+  {
+    title: 'News & Events',
+    links: [
+      { name: 'News & Announcements', href: '/news' },
+      { name: 'Town Calendar', href: '/calendar' },
+      { name: 'Public Notices', href: '/demo' },
+    ],
+  },
+  {
+    title: 'About Littleton',
+    links: [
+      { name: 'About', href: '/about' },
+      { name: 'Town History', href: '/about/history' },
+      { name: 'Officials & Staff', href: '/about/officials' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="Site Map | Town of Littleton, NH" description="A complete directory of all pages on the Town of Littleton, New Hampshire website.">
+
+  <!-- Hero -->
+  <section class="bg-light-blue py-12 text-center" aria-labelledby="hero-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="hero-heading" class="text-4xl font-bold text-navy mb-4">Site Map</h2>
+      <p class="text-body-text text-lg max-w-2xl mx-auto">
+        A complete directory of all pages on the Town of Littleton website.
+      </p>
+    </div>
+  </section>
+
+  <!-- Site Map Grid -->
+  <section class="bg-white py-12" aria-labelledby="sitemap-heading">
+    <h2 id="sitemap-heading" class="sr-only">All Pages</h2>
+    <div class="sitemap-grid">
+      {siteMapGroups.map((group) => (
+        <div class="sitemap-group">
+          <h3 class="group-heading">{group.title}</h3>
+          <ul class="space-y-1 list-none p-0 m-0">
+            {group.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="sitemap-link"
+                >
+                  <span aria-hidden="true" class="link-arrow">›</span>
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 48px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 900px) {
+    .sitemap-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .sitemap-grid { grid-template-columns: 1fr; }
+  }
+
+  .sitemap-group {
+    min-width: 0;
+  }
+
+  .group-heading {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    border-left: 4px solid #C8973A;
+    padding-left: 12px;
+    margin-bottom: 16px;
+  }
+
+  .sitemap-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: #1B2E4B;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .sitemap-link:hover {
+    text-decoration: underline;
+  }
+  .sitemap-link:focus {
+    outline: 2px solid #C8973A;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .link-arrow {
+    color: #2C4A7C;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+</style>

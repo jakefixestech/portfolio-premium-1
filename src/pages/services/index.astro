@@ -1,0 +1,338 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const popularServices = [
+  {
+    title: 'Pay a Bill',
+    description: 'Pay property taxes, water bills, and municipal fees online',
+    href: '/services/pay',
+    icon: 'credit-card',
+  },
+  {
+    title: 'Report a Problem',
+    description: 'Report potholes, streetlight outages, and other issues',
+    href: '/services/report',
+    icon: 'alert',
+  },
+  {
+    title: 'Permits & Licenses',
+    description: 'Apply for building, business, and event permits',
+    href: '/services/permits',
+    icon: 'document',
+  },
+  {
+    title: 'Public Records',
+    description: 'Submit a Right to Know request under RSA 91-A',
+    href: '/services/public-records',
+    icon: 'search',
+  },
+];
+
+const serviceCategories = [
+  {
+    title: 'Payments & Finance',
+    services: [
+      { name: 'Property Taxes', href: '/services/pay/property-taxes' },
+      { name: 'Water Bills', href: '/services/pay/water' },
+      { name: 'Permit Fees', href: '/services/pay/permits' },
+    ],
+  },
+  {
+    title: 'Permits & Licensing',
+    services: [
+      { name: 'Building Permits', href: '/services/permits/building' },
+      { name: 'Business Licenses', href: '/services/permits/business' },
+      { name: 'Event Permits', href: '/services/permits/events' },
+    ],
+  },
+  {
+    title: 'Records & Documents',
+    services: [
+      { name: 'Vital Records', href: '/services/records/vital' },
+      { name: 'Public Records', href: '/services/public-records' },
+      { name: 'RSA 91-A Requests', href: '/services/records/rsa-91a' },
+    ],
+  },
+  {
+    title: 'Voting & Elections',
+    services: [
+      { name: 'Voter Registration', href: '/services/voting/register' },
+      { name: 'Absentee Ballots', href: '/services/voting/absentee' },
+      { name: 'Election Results', href: '/services/voting/results' },
+    ],
+  },
+  {
+    title: 'Trash & Recycling',
+    services: [
+      { name: 'Pickup Schedule', href: '/services/trash/schedule' },
+      { name: 'Recycling Center', href: '/services/trash/recycling' },
+      { name: 'Bulky Waste', href: '/services/trash/bulky' },
+    ],
+  },
+  {
+    title: 'Animal Control',
+    services: [
+      { name: 'Dog Licensing', href: '/services/animals/dog-license' },
+      { name: 'Lost Pets', href: '/services/animals/lost-pets' },
+      { name: 'Animal Complaints', href: '/services/animals/complaints' },
+    ],
+  },
+];
+
+const onlineServices = [
+  'Pay Bills',
+  'Submit Requests',
+  'View Minutes',
+  'Check Permits',
+];
+---
+
+<BaseLayout title="Services | Town of Littleton, NH" description="Access resident services from the Town of Littleton, NH — pay bills, apply for permits, report problems, and more.">
+
+  <!-- Page Hero -->
+  <section class="bg-light-blue py-16" aria-labelledby="hero-heading">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h1 id="hero-heading" class="text-4xl font-bold text-navy mb-4">Resident Services</h1>
+      <p class="text-xl text-body-text max-w-2xl mx-auto">
+        Access the services you need from the Town of Littleton. We're here to make it easy.
+      </p>
+    </div>
+  </section>
+
+  <!-- Popular Services -->
+  <section class="py-16 bg-white" aria-labelledby="popular-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="popular-heading" class="text-3xl font-bold text-navy text-center mb-4">Popular Services</h2>
+      <div class="popular-grid">
+        {popularServices.map((service) => (
+          <a
+            href={service.href}
+            class="popular-card"
+            aria-label={`${service.title} — ${service.description}`}
+          >
+            <div class="service-icon">
+              {service.icon === 'credit-card' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              )}
+              {service.icon === 'alert' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              )}
+              {service.icon === 'document' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              )}
+              {service.icon === 'search' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-bold text-navy mb-2">{service.title}</h3>
+            <p class="text-body-text mb-4">{service.description}</p>
+            <!-- Fixed: navy on white passes contrast — was gold which failed -->
+            <span class="get-started">Get Started <span aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- All Services -->
+  <section class="py-16 bg-light-blue" aria-labelledby="all-services-heading">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="all-services-heading" class="text-3xl font-bold text-navy text-center mb-4">All Services</h2>
+      <div class="services-grid">
+        {serviceCategories.map((category) => (
+          <div class="service-category-card">
+            <h3 class="text-xl font-bold text-navy mb-4">{category.title}</h3>
+            <ul class="space-y-2 list-none p-0 m-0">
+              {category.services.map((service) => (
+                <li>
+                  <a href={service.href} class="service-link">
+                    <span aria-hidden="true" class="service-bullet">›</span>
+                    {service.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Online Services Callout -->
+  <section class="py-16 bg-navy" aria-labelledby="online-heading">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h2 id="online-heading" class="text-3xl font-bold text-white mb-8">Available Online 24/7</h2>
+      <div class="online-grid">
+        {onlineServices.map((service) => (
+          <div class="online-item">
+            <!-- Gold on navy passes contrast — kept as-is -->
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span class="text-lg font-medium text-white">{service}</span>
+          </div>
+        ))}
+      </div>
+      <p class="text-white text-lg mt-8 max-w-2xl mx-auto">
+        Many town services are available online anytime &mdash; no need to visit Town Hall.
+      </p>
+    </div>
+  </section>
+
+  <!-- Need Help -->
+  <section class="py-16 bg-light-blue" aria-labelledby="help-heading">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+      <h2 id="help-heading" class="text-3xl font-bold text-navy mb-4">Can't Find What You Need?</h2>
+      <p class="text-body-text text-lg mb-8 max-w-2xl mx-auto">
+        Our staff is here to help. Contact us and we'll point you in the right direction.
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-navy text-white px-8 py-3 font-semibold rounded hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .popular-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 900px) {
+    .popular-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .popular-grid { grid-template-columns: 1fr; }
+  }
+
+  .popular-card {
+    display: block;
+    background: white;
+    border-top: 4px solid #C8973A;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    text-decoration: none;
+    border-radius: 0 0 8px 8px;
+    transition: box-shadow 0.2s ease;
+  }
+  .popular-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .popular-card:focus {
+    outline: 2px solid #1B2E4B;
+    outline-offset: 2px;
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    color: #2C4A7C;
+    margin-bottom: 16px;
+  }
+
+  /* Fixed: navy on white passes 4.5:1 — was gold #C8973A which failed */
+  .get-started {
+    color: #1B2E4B;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+
+  .service-category-card {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .service-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1E2D3D;
+    text-decoration: none;
+    padding: 4px 0;
+  }
+  .service-link:hover {
+    color: #1B2E4B;
+    text-decoration: underline;
+  }
+  .service-link:focus {
+    outline: 2px solid #1B2E4B;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .service-bullet {
+    color: #2C4A7C;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .online-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .online-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .online-grid { grid-template-columns: 1fr; }
+  }
+
+  .online-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  /* Gold on navy — passes contrast fine, kept as-is */
+  .check-icon {
+    width: 24px;
+    height: 24px;
+    color: #C8973A;
+    flex-shrink: 0;
+  }
+</style>

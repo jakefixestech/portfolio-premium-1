@@ -1,0 +1,520 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const filters = [
+  { label: 'All Events', href: '#all', active: true },
+  { label: 'Meetings', href: '#meetings', active: false },
+  { label: 'Public Hearings', href: '#hearings', active: false },
+  { label: 'Community Events', href: '#community', active: false },
+  { label: 'Deadlines', href: '#deadlines', active: false },
+];
+
+const events = [
+  {
+    day: '5',
+    month: 'Nov',
+    datetime: '2025-11-05',
+    title: 'Selectboard Regular Meeting',
+    time: '6:00 PM – 8:00 PM',
+    location: 'Town Hall, Meeting Room A',
+    category: 'Meeting',
+    description: 'Regular bi-weekly meeting of the Selectboard to discuss town business and hear public comments.',
+    slug: 'selectboard-nov-5',
+  },
+  {
+    day: '8',
+    month: 'Nov',
+    datetime: '2025-11-08',
+    title: 'Veterans Day Ceremony',
+    time: '11:00 AM – 12:00 PM',
+    location: 'Town Common',
+    category: 'Community',
+    description: 'Annual ceremony honoring veterans with guest speakers, wreath laying, and refreshments.',
+    slug: 'veterans-day-ceremony',
+  },
+  {
+    day: '12',
+    month: 'Nov',
+    datetime: '2025-11-12',
+    title: 'Planning Board Public Hearing',
+    time: '7:00 PM – 9:00 PM',
+    location: 'Town Hall, Meeting Room A',
+    category: 'Hearing',
+    description: 'Public hearing on proposed zoning amendments for the downtown commercial district.',
+    slug: 'planning-board-hearing-nov',
+  },
+  {
+    day: '15',
+    month: 'Nov',
+    datetime: '2025-11-15',
+    title: 'Property Tax Payment Deadline',
+    time: 'By 4:00 PM',
+    location: 'Town Clerk Office or Online',
+    category: 'Deadline',
+    description: 'Second half of 2025 property taxes are due. Pay online or in person at Town Hall.',
+    slug: 'tax-deadline-nov',
+  },
+  {
+    day: '19',
+    month: 'Nov',
+    datetime: '2025-11-19',
+    title: 'Selectboard Regular Meeting',
+    time: '6:00 PM – 8:00 PM',
+    location: 'Town Hall, Meeting Room A',
+    category: 'Meeting',
+    description: 'Regular bi-weekly meeting including discussion of winter road maintenance contracts.',
+    slug: 'selectboard-nov-19',
+  },
+  {
+    day: '2',
+    month: 'Dec',
+    datetime: '2025-12-02',
+    title: 'Budget Committee Meeting',
+    time: '6:30 PM – 8:30 PM',
+    location: 'Town Hall, Meeting Room B',
+    category: 'Meeting',
+    description: 'Review of proposed 2026 municipal budget with department heads presenting their requests.',
+    slug: 'budget-committee-dec',
+  },
+  {
+    day: '7',
+    month: 'Dec',
+    datetime: '2025-12-07',
+    title: 'Holiday Tree Lighting',
+    time: '5:00 PM – 7:00 PM',
+    location: 'Town Common',
+    category: 'Community',
+    description: 'Annual tree lighting ceremony with caroling, hot cocoa, and a visit from Santa Claus.',
+    slug: 'tree-lighting-2025',
+  },
+  {
+    day: '10',
+    month: 'Dec',
+    datetime: '2025-12-10',
+    title: 'Conservation Commission Public Hearing',
+    time: '7:00 PM – 9:00 PM',
+    location: 'Town Hall, Meeting Room A',
+    category: 'Hearing',
+    description: 'Hearing on wetland permit application for the River Road development project.',
+    slug: 'conservation-hearing-dec',
+  },
+];
+
+const categoryColors: Record<string, { bg: string; text: string }> = {
+  Meeting:   { bg: '#EEF2F8', text: '#1B2E4B' },
+  Hearing:   { bg: '#FEF3C7', text: '#92400E' },
+  Community: { bg: '#1B2E4B', text: '#FFFFFF' },
+  Deadline:  { bg: '#FEE2E2', text: '#991B1B' },
+};
+---
+
+<BaseLayout title="Town Calendar | Town of Littleton, NH" description="Stay informed about upcoming meetings, events, and important dates for the Town of Littleton, New Hampshire.">
+
+  <!-- Hero -->
+  <section class="hero-section" aria-labelledby="calendar-hero-heading">
+    <div class="hero-container">
+      <h1 id="calendar-hero-heading" class="hero-title">Town Calendar</h1>
+      <p class="hero-subtitle">
+        Stay informed about upcoming meetings, events, and important dates for the Town of Littleton.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filter Bar -->
+  <section class="filter-section" aria-labelledby="filter-heading">
+    <h2 id="filter-heading" class="sr-only">Filter Events</h2>
+    <div class="filter-container">
+      <div class="filter-buttons">
+        {filters.map((filter) => (
+          <a
+            href={filter.href}
+            class={filter.active ? 'filter-btn filter-btn-active' : 'filter-btn filter-btn-inactive'}
+          >
+            {filter.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section class="events-section" aria-labelledby="events-heading">
+    <h2 id="events-heading" class="events-title">Upcoming Events</h2>
+    <div class="events-list">
+      {events.map((event) => (
+        <article class="event-card">
+          <div class="date-block">
+            <time datetime={event.datetime}>
+              <span class="date-day">{event.day}</span>
+              <span class="date-month">{event.month}</span>
+            </time>
+          </div>
+          <div class="event-content">
+            <div class="event-header">
+              <h3 class="event-title">{event.title}</h3>
+              <span
+                class="category-badge"
+                style={`background-color: ${categoryColors[event.category].bg}; color: ${categoryColors[event.category].text};`}
+              >
+                {event.category}
+              </span>
+            </div>
+            <div class="event-meta">
+              <span class="event-time">
+                <svg aria-hidden="true" class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                {event.time}
+              </span>
+              <span class="event-location">
+                <svg aria-hidden="true" class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                {event.location}
+              </span>
+            </div>
+            <p class="event-description">{event.description}</p>
+            <a
+              href={`/calendar/${event.slug}`}
+              class="event-link"
+              aria-label={`View details for ${event.title} on ${event.month} ${event.day}`}
+            >
+              View Details <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Submit an Event -->
+  <section class="submit-section" aria-labelledby="submit-heading">
+    <div class="submit-container">
+      <h2 id="submit-heading" class="submit-title">Submit a Community Event</h2>
+      <p class="submit-text">
+        Have a community event to share? Submit it for consideration on the town calendar.
+      </p>
+      <a href="/contact" class="submit-btn">
+        Submit Event
+      </a>
+    </div>
+  </section>
+
+  <!-- Subscribe -->
+  <section class="subscribe-section" aria-labelledby="subscribe-heading">
+    <div class="subscribe-container">
+      <h2 id="subscribe-heading" class="subscribe-title">Subscribe to Calendar Updates</h2>
+      <p class="subscribe-text">
+        Never miss an important town meeting or event. Add our calendar to your favorite calendar app.
+      </p>
+      <div class="subscribe-buttons">
+        <a href="#" class="subscribe-btn subscribe-btn-primary">
+          <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.5 22h-15A2.5 2.5 0 0 1 2 19.5v-15A2.5 2.5 0 0 1 4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5zM9.5 6v5.5H4v7h7v-5.5h5.5v-7H9.5z"/>
+          </svg>
+          Add to Google Calendar
+        </a>
+        <a href="#" class="subscribe-btn subscribe-btn-secondary">
+          <svg aria-hidden="true" class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download iCal Feed
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Hero */
+  .hero-section {
+    background-color: #EEF2F8;
+    padding: 64px 32px;
+    text-align: center;
+  }
+  .hero-container { max-width: 896px; margin: 0 auto; }
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    margin-bottom: 16px;
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: #1E2D3D;
+    line-height: 1.6;
+  }
+
+  /* Filter */
+  .filter-section {
+    background-color: white;
+    padding: 24px 32px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .filter-container { max-width: 896px; margin: 0 auto; }
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .filter-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .filter-btn:focus {
+    outline: 2px solid #1B2E4B;
+    outline-offset: 2px;
+  }
+  .filter-btn-active {
+    background-color: #1B2E4B;
+    color: white;
+  }
+  .filter-btn-inactive {
+    background-color: #EEF2F8;
+    color: #1B2E4B;
+  }
+  .filter-btn-inactive:hover { opacity: 0.8; }
+
+  /* Events */
+  .events-section {
+    background-color: white;
+    padding: 48px 0;
+  }
+  .events-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  .event-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .date-block {
+    background-color: #1B2E4B;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+  }
+  .date-day {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .date-month {
+    display: block;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+  .event-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .event-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .event-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1B2E4B;
+    margin: 0;
+  }
+  .category-badge {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+  }
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.875rem;
+    color: #1E2D3D;
+  }
+  .event-time,
+  .event-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .meta-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .event-description {
+    font-size: 0.9rem;
+    color: #1E2D3D;
+    line-height: 1.5;
+    margin: 4px 0;
+  }
+  /* Fixed: navy on white passes 4.5:1 — was gold which failed */
+  .event-link {
+    color: #1B2E4B;
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 0.9rem;
+    align-self: flex-start;
+  }
+  .event-link:hover { color: #2C4A7C; }
+  .event-link:focus {
+    outline: 2px solid #1B2E4B;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Submit */
+  .submit-section {
+    background-color: #EEF2F8;
+    padding: 64px 32px;
+    text-align: center;
+  }
+  .submit-container { max-width: 640px; margin: 0 auto; }
+  .submit-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1B2E4B;
+    margin-bottom: 16px;
+  }
+  .submit-text {
+    color: #1E2D3D;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .submit-btn {
+    display: inline-block;
+    background-color: #1B2E4B;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .submit-btn:hover { opacity: 0.9; }
+  .submit-btn:focus {
+    outline: 2px solid #1B2E4B;
+    outline-offset: 2px;
+  }
+
+  /* Subscribe */
+  .subscribe-section {
+    background-color: #1B2E4B;
+    padding: 64px 32px;
+    text-align: center;
+  }
+  .subscribe-container { max-width: 640px; margin: 0 auto; }
+  .subscribe-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .subscribe-text {
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+  .subscribe-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .subscribe-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .subscribe-btn:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+  /* Gold on navy passes contrast — kept as-is */
+  .subscribe-btn-primary {
+    background-color: #C8973A;
+    color: #1B2E4B;
+  }
+  .subscribe-btn-primary:hover { opacity: 0.9; }
+  .subscribe-btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .subscribe-btn-secondary:hover { opacity: 0.85; }
+  .btn-icon { width: 20px; height: 20px; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .event-card { grid-template-columns: 1fr; }
+    .date-block {
+      flex-direction: row;
+      gap: 8px;
+      min-height: auto;
+      padding: 12px 16px;
+    }
+    .date-day { font-size: 1.5rem; }
+    .hero-title { font-size: 2rem; }
+  }
+</style>

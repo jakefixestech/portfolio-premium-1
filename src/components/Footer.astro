@@ -1,0 +1,156 @@
+---
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Town Clerk', href: '/departments/town-clerk' },
+  { label: 'Pay a Bill', href: '/services/pay' },
+  { label: 'Meeting Minutes', href: '/government/meeting-minutes' },
+  { label: 'Report a Problem', href: '/services/report' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Accessibility', href: '/accessibility' },
+  { label: 'Privacy Policy', href: '/privacy' },
+];
+
+const officeHours = [
+  { day: 'Monday – Friday', hours: '8:00 AM – 4:30 PM' },
+  { day: 'Saturday', hours: 'Closed' },
+  { day: 'Sunday', hours: 'Closed' },
+];
+---
+
+<footer class="site-footer">
+  <div class="footer-gold-bar"></div>
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="footer-grid">
+
+      <!-- Town Info -->
+      <div>
+        <h3 class="footer-heading">Town of Littleton</h3>
+        <address class="not-italic text-sm leading-relaxed footer-text">
+          125 Main Street<br />
+          Littleton, NH 03561<br /><br />
+          <a href="tel:+16035550100" class="footer-link">
+            Phone: (603) 555-0100
+          </a><br />
+          <a href="mailto:info@littletonnh.gov" class="footer-link">
+            Email: info@littletonnh.gov
+          </a>
+        </address>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <nav aria-label="Footer navigation">
+          <ul class="space-y-2 text-sm">
+            {quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="footer-link">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Office Hours -->
+      <div>
+        <h3 class="footer-heading">Office Hours</h3>
+        <ul class="space-y-2 text-sm footer-text">
+          {officeHours.map((item) => (
+            <li>
+              <span class="font-medium">{item.day}:</span> {item.hours}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="mb-3">
+        &copy; 2025 Town of Littleton, NH &mdash; Demo site, not affiliated with the actual Town of Littleton | Site by
+        <a href="https://jakefixestech.com" class="underline hover:text-gold focus:outline-2 focus:outline-gold focus:outline-offset-2">
+          Jake Fixes Tech
+        </a>
+      </p>
+      <nav aria-label="Legal and utility links">
+        <ul class="flex justify-center gap-6 flex-wrap list-none p-0 m-0">
+          <li><a href="/accessibility" class="footer-bottom-link">Accessibility</a></li>
+          <li><a href="/privacy" class="footer-bottom-link">Privacy Policy</a></li>
+          <li><a href="/sitemap" class="footer-bottom-link">Site Map</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #1B2E4B;
+    color: white;
+  }
+
+  .footer-gold-bar {
+    height: 4px;
+    background: #C8973A;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+
+  .footer-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #C8973A;
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .footer-text {
+    color: #bfcfe0;
+  }
+
+  .footer-link {
+    color: #bfcfe0;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: #C8973A; }
+
+  .footer-link:focus {
+    outline: 2px solid #C8973A;
+    outline-offset: 2px;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #8fa8c4;
+  }
+
+  .footer-bottom-link {
+    color: #8fa8c4;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-bottom-link:hover { color: #C8973A; }
+  .footer-bottom-link:focus {
+    outline: 2px solid #C8973A;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+</style>

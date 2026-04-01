@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const highlights = [
+  'Complete audited financial statements',
+  'Department activity summaries',
+  'Capital improvement project updates',
+];
+
+const keyStats = [
+  { label: 'Police calls for service', value: '4,287' },
+  { label: 'Fire/EMS responses', value: '892' },
+  { label: 'Building permits issued', value: '156' },
+  { label: 'Library visits', value: '28,450' },
+  { label: 'Miles of roads maintained', value: '78' },
+];
+
+const pastYears = [2023, 2022, 2021, 2020, 2019];
+---
+
+<BaseLayout title="Annual Reports | Town of Littleton, NH" description="Yearly reports documenting town finances, department activities, and community progress for the Town of Littleton, New Hampshire.">
+
+  <!-- Hero -->
+  <section aria-labelledby="hero-heading" class="bg-light-blue py-16">
+    <div class="max-w-7xl mx-auto px-8">
+      <nav aria-label="Breadcrumb">
+        <ol class="flex items-center gap-2 text-sm text-body-text mb-4 list-none p-0 m-0">
+          <li>
+            <a href="/government" class="hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+              Government
+            </a>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-navy font-medium">Annual Reports</li>
+        </ol>
+      </nav>
+      <h2 id="hero-heading" class="text-4xl font-bold text-navy mb-4">Annual Reports</h2>
+      <p class="text-xl text-body-text max-w-3xl">
+        Yearly reports documenting town finances, department activities, and community progress.
+      </p>
+    </div>
+  </section>
+
+  <!-- Latest Report -->
+  <section aria-labelledby="latest-heading" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="latest-heading" class="text-3xl font-bold text-navy text-center mb-8">2024 Annual Report</h2>
+      <div class="report-grid">
+        <div>
+          <p class="text-body-text mb-6 leading-relaxed">
+            The 2024 Annual Report provides a comprehensive overview of the Town of Littleton's
+            operations, finances, and achievements over the past fiscal year. This report includes
+            detailed financial statements, department summaries, and key statistics that demonstrate
+            our commitment to transparent and effective local government.
+          </p>
+
+          <h3 class="text-xl font-bold text-navy mb-4">Report Highlights</h3>
+          <ul class="space-y-3 text-body-text list-none p-0 m-0 mb-6">
+            {highlights.map((item) => (
+              <li class="flex items-start gap-3">
+                <svg aria-hidden="true" class="highlight-check flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <h3 class="text-xl font-bold text-navy mb-4">Key Statistics</h3>
+          <dl class="space-y-0">
+            {keyStats.map((stat) => (
+              <div class="flex justify-between py-2 border-b border-light-blue">
+                <dt class="text-body-text">{stat.label}</dt>
+                <dd class="font-semibold text-navy">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div>
+          <div class="download-card">
+            <svg aria-hidden="true" class="w-20 h-20 text-mid-blue mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <h3 class="text-2xl font-bold text-navy mb-2">2024 Annual Report</h3>
+            <p class="text-body-text mb-6">PDF Document, 3.2MB</p>
+            <a
+              href="#"
+              class="inline-block bg-navy text-white font-semibold px-8 py-4 rounded text-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+              aria-label="Download 2024 Annual Report PDF"
+            >
+              Download 2024 Annual Report
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Reports -->
+  <section aria-labelledby="past-heading" class="py-16 bg-light-blue">
+    <div class="max-w-7xl mx-auto px-8">
+      <h2 id="past-heading" class="text-3xl font-bold text-navy text-center mb-8">Past Annual Reports</h2>
+      <div class="years-grid">
+        {pastYears.map((year) => (
+          <div class="bg-white p-6 rounded-lg text-center">
+            <h3 class="text-2xl font-bold text-navy mb-4">{year}</h3>
+            <a
+              href="#"
+              class="text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+              aria-label={`Download ${year} Annual Report PDF`}
+            >
+              Download PDF <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Department Reports -->
+  <section aria-labelledby="dept-heading" class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-8 text-center">
+      <h2 id="dept-heading" class="text-3xl font-bold text-navy mb-4">Department Annual Reports</h2>
+      <p class="text-body-text mb-8 leading-relaxed">
+        Each town department prepares detailed annual reports covering their operations,
+        accomplishments, and goals for the coming year. These reports are included in the
+        Town Annual Report and are also available directly from each department.
+      </p>
+      <a
+        href="/departments"
+        class="inline-block bg-navy text-white font-semibold px-6 py-3 rounded hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2"
+      >
+        View All Departments <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .report-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    .report-grid { grid-template-columns: 1fr; }
+  }
+
+  .years-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 768px) {
+    .years-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .download-card {
+    background-color: #EEF2F8;
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .highlight-check {
+    width: 20px;
+    height: 20px;
+    color: #C8973A;
+  }
+</style>
