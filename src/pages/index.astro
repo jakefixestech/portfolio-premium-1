@@ -53,15 +53,18 @@ const stats = [
   <!-- Hero — Split Layout -->
   <section class="hero-split" aria-labelledby="hero-heading">
     <div class="hero-photo-side">
-      <img
-        src="/hero.jpeg"
-        alt="Littleton, New Hampshire — the red mill building and Ammonoosuc River in autumn"
-        width="1200"
-        height="800"
-        fetchpriority="high"
-        decoding="async"
-        class="hero-photo"
-      />
+      <picture>
+        <source srcset="/hero.webp" type="image/webp" />
+        <img
+          src="/hero.jpeg"
+          alt="Littleton, New Hampshire — the red mill building and Ammonoosuc River in autumn"
+          width="1200"
+          height="800"
+          fetchpriority="high"
+          decoding="async"
+          class="hero-photo"
+        />
+      </picture>
     </div>
     <div class="hero-text-side">
       <div class="hero-text-inner">
@@ -94,7 +97,6 @@ const stats = [
   </section>
 
   <!-- Announcement Banner -->
-  <!-- Gold on navy text passes contrast — no change needed here -->
   <section class="py-4" style="background:#C8973A;" aria-labelledby="announcement-heading">
     <div class="max-w-7xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
       <p class="font-medium text-center sm:text-left" style="color:#1B2E4B;">
@@ -203,7 +205,6 @@ const stats = [
     border-width: 0;
   }
 
-  /* Hero Split */
   .hero-split {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -213,6 +214,13 @@ const stats = [
   .hero-photo-side {
     position: relative;
     overflow: hidden;
+  }
+
+  /* picture element needs to fill the container just like img did */
+  .hero-photo-side picture {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .hero-photo {
@@ -238,7 +246,6 @@ const stats = [
     top: 0;
     bottom: 0;
     width: 4px;
-    /* Gold on navy — passes contrast fine */
     background: #C8973A;
   }
 
@@ -249,7 +256,6 @@ const stats = [
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    /* Gold on navy — passes contrast fine */
     color: #C8973A;
     margin-bottom: 0.75rem;
   }
@@ -280,7 +286,6 @@ const stats = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    /* Gold on navy — passes contrast fine */
     background: #C8973A;
     color: #1B2E4B;
     font-weight: 700;
@@ -323,7 +328,6 @@ const stats = [
     .hero-text-inner { max-width: 100%; }
   }
 
-  /* Quick Links */
   .quick-links-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -346,7 +350,6 @@ const stats = [
   .quick-link-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .quick-link-card:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
 
-  /* Departments */
   .departments-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -370,7 +373,6 @@ const stats = [
   .dept-link:hover { background-color: rgba(255,255,255,0.22); }
   .dept-link:focus { outline: 2px solid #C8973A; outline-offset: 2px; }
 
-  /* News */
   .news-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -378,8 +380,6 @@ const stats = [
   }
   @media (max-width: 900px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } }
-
- 
 
   .news-btn {
     display: inline-flex;
@@ -396,7 +396,6 @@ const stats = [
   .news-btn:hover { opacity: 0.9; }
   .news-btn:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
 
-  /* Stats */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -413,7 +412,6 @@ const stats = [
     color: #2C4A7C;
   }
 
-  /* Officials CTA */
   .officials-cta {
     display: flex;
     align-items: center;
