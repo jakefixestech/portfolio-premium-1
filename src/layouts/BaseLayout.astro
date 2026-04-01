@@ -21,9 +21,30 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preconnect to Google Fonts domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+    <!--
+      Non-blocking font load:
+      1. media="print" means browser won't block rendering on this stylesheet
+      2. onload switches it to media="all" once downloaded
+      3. <noscript> fallback for JS-disabled browsers
+    -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
+      />
+    </noscript>
+
     <title>{title}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-white">

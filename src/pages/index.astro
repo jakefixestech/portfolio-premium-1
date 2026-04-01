@@ -69,7 +69,8 @@ const stats = [
           width="1200"
           height="800"
           fetchpriority="high"
-          decoding="async"
+          loading="eager"
+          decoding="sync"
           class="hero-photo"
         />
       </picture>
@@ -213,6 +214,8 @@ const stats = [
     border-width: 0;
   }
 
+  /* ─── Hero ─────────────────────────────────────────────────── */
+
   .hero-split {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -222,12 +225,20 @@ const stats = [
   .hero-photo-side {
     position: relative;
     overflow: hidden;
+    /* Prevent the container from collapsing before the image loads */
+    contain: layout;
   }
 
   .hero-photo-side picture {
     display: block;
     width: 100%;
     height: 100%;
+    /*
+      Reserve the correct aspect-ratio space immediately so the browser
+      knows how tall this element will be before the image byte arrives.
+      This is the primary CLS fix.
+    */
+    aspect-ratio: 3 / 2;
   }
 
   .hero-photo {
@@ -325,7 +336,16 @@ const stats = [
   @media (max-width: 768px) {
     .hero-split {
       grid-template-columns: 1fr;
-      grid-template-rows: 280px auto;
+      /*
+        Use auto/auto instead of a fixed 280px row height.
+        The picture's aspect-ratio drives the image row height,
+        eliminating the CLS from a hard-coded pixel value.
+      */
+      grid-template-rows: auto auto;
+    }
+    .hero-photo-side picture {
+      /* On mobile use a slightly wider crop ratio to avoid excess height */
+      aspect-ratio: 16 / 9;
     }
     .hero-text-side::before {
       left: 0; right: 0; top: 0; bottom: auto;
@@ -334,6 +354,8 @@ const stats = [
     .hero-heading { font-size: 1.75rem; }
     .hero-text-inner { max-width: 100%; }
   }
+
+  /* ─── Quick Links ───────────────────────────────────────────── */
 
   .quick-links-grid {
     display: grid;
@@ -356,6 +378,8 @@ const stats = [
   }
   .quick-link-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .quick-link-card:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
+
+  /* ─── Departments ───────────────────────────────────────────── */
 
   .departments-grid {
     display: grid;
@@ -380,6 +404,8 @@ const stats = [
   .dept-link:hover { background-color: rgba(255,255,255,0.22); }
   .dept-link:focus { outline: 2px solid #C8973A; outline-offset: 2px; }
 
+  /* ─── News ──────────────────────────────────────────────────── */
+
   .news-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -403,6 +429,8 @@ const stats = [
   .news-btn:hover { opacity: 0.9; }
   .news-btn:focus { outline: 2px solid #1B2E4B; outline-offset: 2px; }
 
+  /* ─── Stats ─────────────────────────────────────────────────── */
+
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -418,6 +446,8 @@ const stats = [
     letter-spacing: 0.05em;
     color: #2C4A7C;
   }
+
+  /* ─── Officials CTA ─────────────────────────────────────────── */
 
   .officials-cta {
     display: flex;
