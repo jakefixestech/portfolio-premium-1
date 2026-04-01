@@ -107,19 +107,30 @@ const subjects = [
         </div>
 
         <!-- Map Placeholder -->
+        <!--
+          FIX: Changed text color from text-gray-500 (#6B7280, ~4.0:1 on gray-200)
+          to map-label-text (#374151 / gray-700, ~10:1 on gray-200).
+          aria-hidden="true" means this is decorative but we fix it anyway
+          in case Lighthouse's contrast checker inspects it regardless.
+        -->
         <div
-          class="bg-gray-200 h-64 flex items-center justify-center"
+          class="map-placeholder h-64 flex items-center justify-center"
           role="img"
           aria-label="Map showing location of Littleton Town Hall at 125 Main Street"
         >
-          <p class="text-gray-500 text-sm" aria-hidden="true">Map placeholder</p>
+          <p class="map-placeholder-text text-sm" aria-hidden="true">Map placeholder</p>
         </div>
       </div>
 
       <!-- Right Column - Contact Form -->
       <div>
         <h3 class="text-2xl font-bold text-navy mb-2">Send Us a Message</h3>
-        <p class="text-sm text-body-text mb-6">
+        <!--
+          FIX: Changed from text-body-text (potentially low contrast at small size)
+          to explicit text-gray-700 (#374151) which is ~10:1 on white — safely passes
+          WCAG AA at all text sizes including sm.
+        -->
+        <p class="text-sm required-note mb-6">
           <span aria-hidden="true">*</span> Required field
         </p>
 
@@ -127,7 +138,7 @@ const subjects = [
 
           <div>
             <label for="full-name" class="block text-sm font-semibold text-navy mb-2">
-              Full Name <span aria-hidden="true" class="text-red-600">*</span>
+              Full Name <span aria-hidden="true" class="required-asterisk">*</span>
             </label>
             <input
               type="text"
@@ -142,7 +153,7 @@ const subjects = [
 
           <div>
             <label for="email" class="block text-sm font-semibold text-navy mb-2">
-              Email Address <span aria-hidden="true" class="text-red-600">*</span>
+              Email Address <span aria-hidden="true" class="required-asterisk">*</span>
             </label>
             <input
               type="email"
@@ -157,7 +168,7 @@ const subjects = [
 
           <div>
             <label for="subject" class="block text-sm font-semibold text-navy mb-2">
-              Subject <span aria-hidden="true" class="text-red-600">*</span>
+              Subject <span aria-hidden="true" class="required-asterisk">*</span>
             </label>
             <select
               id="subject"
@@ -175,7 +186,7 @@ const subjects = [
 
           <div>
             <label for="message" class="block text-sm font-semibold text-navy mb-2">
-              Message <span aria-hidden="true" class="text-red-600">*</span>
+              Message <span aria-hidden="true" class="required-asterisk">*</span>
             </label>
             <textarea
               id="message"
@@ -210,8 +221,13 @@ const subjects = [
         {departments.map((dept) => (
           <article class="bg-white p-6 border border-gray-200 rounded">
             <h3 class="text-lg font-bold text-navy mb-3">{dept.name}</h3>
+            <!--
+              FIX: Department card body text uses explicit dept-text class
+              set to #374151 (gray-700, ~10:1 on white) instead of
+              text-body-text which may resolve to a lighter shade.
+            -->
             <div class="space-y-2 text-sm">
-              <p class="text-body-text">
+              <p class="dept-text">
                 <span class="font-medium">Phone:</span>{' '}
                 <a
                   href={`tel:${dept.phone.replace(/[^\d+]/g, '')}`}
@@ -220,7 +236,7 @@ const subjects = [
                   {dept.phone}
                 </a>
               </p>
-              <p class="text-body-text">
+              <p class="dept-text">
                 <span class="font-medium">Email:</span>{' '}
                 <a
                   href={`mailto:${dept.email}`}
@@ -229,7 +245,7 @@ const subjects = [
                   {dept.email}
                 </a>
               </p>
-              <p class="text-body-text">
+              <p class="dept-text">
                 <span class="font-medium">Hours:</span> {dept.hours}
               </p>
             </div>
@@ -253,6 +269,38 @@ const subjects = [
     white-space: nowrap;
     border-width: 0;
   }
+
+  /* ── Map placeholder ─────────────────────────────────────────── */
+
+  .map-placeholder {
+    background-color: #e5e7eb; /* gray-200 */
+  }
+
+  .map-placeholder-text {
+    /* gray-700 = #374151, contrast ~10:1 on gray-200 — safely passes WCAG AA */
+    color: #374151;
+  }
+
+  /* ── Required field note & asterisks ─────────────────────────── */
+
+  .required-note {
+    /* gray-700 on white = ~10:1, passes at all text sizes */
+    color: #374151;
+  }
+
+  .required-asterisk {
+    /* red-700 = #B91C1C, contrast ~5.9:1 on white — passes WCAG AA */
+    color: #B91C1C;
+  }
+
+  /* ── Department card body text ───────────────────────────────── */
+
+  .dept-text {
+    /* gray-700 = #374151, ~10:1 on white — well above 4.5:1 threshold */
+    color: #374151;
+  }
+
+  /* ── Layout ──────────────────────────────────────────────────── */
 
   .contact-grid {
     display: grid;
