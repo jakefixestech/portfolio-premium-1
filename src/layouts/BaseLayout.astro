@@ -22,15 +22,15 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Preconnect to Google Fonts domains -->
+    <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!--
-      Non-blocking font load:
-      1. media="print" means browser won't block rendering on this stylesheet
-      2. onload switches it to media="all" once downloaded
-      3. <noscript> fallback for JS-disabled browsers
+      Non-blocking font load — media="print" prevents render blocking.
+      onload swaps it to media="all" once the stylesheet is downloaded.
+      Fallback fonts are metric-matched in global.css via @font-face
+      size-adjust so the layout does not shift when the web font swaps in.
     -->
     <link
       rel="stylesheet"
