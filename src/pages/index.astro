@@ -54,7 +54,15 @@ const stats = [
   <section class="hero-split" aria-labelledby="hero-heading">
     <div class="hero-photo-side">
       <picture>
+        <!-- Small WebP for mobile screens -->
+        <source
+          srcset="/hero-mobile.webp"
+          type="image/webp"
+          media="(max-width: 768px)"
+        />
+        <!-- Full WebP for desktop -->
         <source srcset="/hero.webp" type="image/webp" />
+        <!-- JPEG fallback for browsers that don't support WebP -->
         <img
           src="/hero.jpeg"
           alt="Littleton, New Hampshire — the red mill building and Ammonoosuc River in autumn"
@@ -216,7 +224,6 @@ const stats = [
     overflow: hidden;
   }
 
-  /* picture element needs to fill the container just like img did */
   .hero-photo-side picture {
     display: block;
     width: 100%;
