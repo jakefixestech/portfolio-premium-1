@@ -139,6 +139,8 @@ const pastYears = [2023, 2022, 2021, 2020, 2019];
 </BaseLayout>
 
 <style>
+  /* ── Latest report two-column layout ─────────────────────────── */
+
   .report-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -151,17 +153,39 @@ const pastYears = [2023, 2022, 2021, 2020, 2019];
     .report-grid { grid-template-columns: 1fr; }
   }
 
+  /* ── Past years grid ─────────────────────────────────────────── */
+
   .years-grid {
     display: grid;
+    
     grid-template-columns: repeat(5, 1fr);
     gap: 16px;
     max-width: 1000px;
     margin: 40px auto;
-    padding: 0 32px;
+    padding: 0 16px; /* reduced from 32px so cards don't squeeze on narrow screens */
   }
-  @media (max-width: 768px) {
-    .years-grid { grid-template-columns: repeat(3, 1fr); }
+
+  @media (max-width: 900px) {
+    .years-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
+
+  @media (max-width: 600px) {
+    .years-grid {
+      
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Center the lone 5th card on its own row */
+    .years-grid > *:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: calc(50% - 8px);
+      margin: 0 auto;
+    }
+  }
+
+  /* ── Download card ───────────────────────────────────────────── */
 
   .download-card {
     background-color: #EEF2F8;
@@ -169,6 +193,8 @@ const pastYears = [2023, 2022, 2021, 2020, 2019];
     border-radius: 12px;
     text-align: center;
   }
+
+  /* ── Highlight checkmarks ────────────────────────────────────── */
 
   .highlight-check {
     width: 20px;
