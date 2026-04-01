@@ -29,36 +29,85 @@ const navItems = [
   </div>
 
   <nav class="header-nav" aria-label="Main navigation">
-    <div class="max-w-7xl mx-auto px-4 py-2">
-      <ul class="flex flex-wrap justify-center gap-1 md:gap-2 list-none m-0 p-0">
+    <div class="nav-inner max-w-7xl mx-auto px-4">
+
+      <!-- Hamburger button — hidden on desktop, visible ≤900px -->
+      <button
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        aria-label="Open navigation menu"
+      >
+        <span class="hamburger-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="nav-toggle-label" id="nav-toggle-label">Menu</span>
+      </button>
+
+      <!-- Nav link list -->
+      <ul class="nav-list" id="nav-menu" role="list">
         {navItems.map((item, index) => (
-          <li class="flex items-center">
-            <a href={item.href} class="nav-link px-3 py-2 text-sm md:text-base rounded">
+          <li class="nav-item">
+            <a href={item.href} class="nav-link">
               {item.label}
             </a>
             {index < navItems.length - 1 && (
-              <span class="nav-divider hidden md:inline" aria-hidden="true">|</span>
+              <span class="nav-divider" aria-hidden="true">|</span>
             )}
           </li>
         ))}
       </ul>
+
     </div>
   </nav>
 </header>
 
-<style>
-  /*
-    ── FONT FALLBACK METRIC MATCHING ─────────────────────────────────
-    These @font-face declarations create local "adjusted" versions of
-    the system fallback fonts. size-adjust, ascent-override, and
-    descent-override are tuned so Georgia (Playfair fallback) and
-    Georgia (Source Serif fallback) occupy the same line-box dimensions
-    as the web fonts. This means zero layout shift when the Google Fonts
-    swap in — the text takes up exactly the same space before and after.
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu   = document.getElementById('nav-menu');
+  const label  = document.getElementById('nav-toggle-label');
 
-    Values derived by comparing Playfair Display and Source Serif 4
-    metrics against Georgia's default metrics.
-  ────────────────────────────────────────────────────────────────── */
+  if (toggle && menu && label) {
+    // Open / close on button click
+    toggle.addEventListener('click', () => {
+      const opening = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(opening));
+      toggle.setAttribute('aria-label', opening ? 'Close navigation menu' : 'Open navigation menu');
+      label.textContent = opening ? 'Close' : 'Menu';
+      menu.classList.toggle('nav-list--open', opening);
+      toggle.classList.toggle('nav-toggle--open', opening);
+    });
+
+    // Close when any nav link is clicked
+    menu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        label.textContent = 'Menu';
+        menu.classList.remove('nav-list--open');
+        toggle.classList.remove('nav-toggle--open');
+      });
+    });
+
+    // Close on Escape and return focus to toggle
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('nav-list--open')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        label.textContent = 'Menu';
+        menu.classList.remove('nav-list--open');
+        toggle.classList.remove('nav-toggle--open');
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  /* ── Metric-matched fallback fonts (prevents CLS on font swap) ── */
 
   @font-face {
     font-family: 'Playfair-Fallback';
@@ -105,14 +154,9 @@ const navItems = [
     border-bottom: 1px solid #e5e7eb;
   }
 
-  /* ── Header title ────────────────────────────────────────────── */
+  /* ── Wordmark ────────────────────────────────────────────────── */
 
   .header-title {
-    /*
-      Use the metric-matched fallback first so the layout is stable
-      while Playfair Display downloads. When the web font arrives the
-      swap is invisible because both fonts occupy the same space.
-    */
     font-family: 'Playfair Display', 'Playfair-Fallback', Georgia, serif;
     display: flex;
     align-items: baseline;
@@ -137,9 +181,6 @@ const navItems = [
   }
 
   .header-subtitle {
-    /*
-      Same metric-matching approach for Source Serif 4.
-    */
     font-family: 'Source Serif 4', 'SourceSerif-Fallback', Georgia, serif;
     font-size: 0.875rem;
     color: #2C4A7C;
@@ -149,10 +190,36 @@ const navItems = [
     font-weight: 400;
   }
 
-  /* ── Nav ─────────────────────────────────────────────────────── */
+  /* ── Nav bar ─────────────────────────────────────────────────── */
 
   .header-nav {
     background: #1B2E4B;
+    position: relative; /* anchor for the dropdown */
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  /* ── Desktop nav list ────────────────────────────────────────── */
+
+  .nav-list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    gap: 0;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
   }
 
   .nav-link {
@@ -160,20 +227,140 @@ const navItems = [
     color: rgba(255,255,255,0.9);
     text-decoration: none;
     font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
     transition: color 0.2s;
     letter-spacing: 0.02em;
+    display: block;
   }
-
   .nav-link:hover { color: #A67A28; }
-
   .nav-link:focus {
     outline: 2px solid #A67A28;
     outline-offset: 2px;
   }
 
-  .nav-divider { color: rgba(255,255,255,0.6); }
+  .nav-divider {
+    color: rgba(255,255,255,0.6);
+    padding: 0 2px;
+    user-select: none;
+  }
 
-  /* ── Responsive ──────────────────────────────────────────────── */
+  /* Hamburger hidden on desktop */
+  .nav-toggle { display: none; }
+
+  /* ── Mobile / Tablet ≤900px ──────────────────────────────────── */
+
+  @media (max-width: 900px) {
+
+    /* Right-align the toggle button */
+    .nav-inner {
+      justify-content: flex-end;
+      padding: 0 0.5rem;
+    }
+
+    /* Show hamburger button */
+    .nav-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 6px;
+      color: white;
+      padding: 8px 14px;
+      margin: 6px 0;
+      cursor: pointer;
+      font-family: 'Source Serif 4', 'SourceSerif-Fallback', Georgia, serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .nav-toggle:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.08);
+    }
+    .nav-toggle:focus {
+      outline: 2px solid #A67A28;
+      outline-offset: 2px;
+    }
+
+    /* 3-line icon */
+    .hamburger-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 20px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .hamburger-icon span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+
+    /* Animate to X when open */
+    .nav-toggle--open .hamburger-icon span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .nav-toggle--open .hamburger-icon span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nav-toggle--open .hamburger-icon span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    /* Dropdown — hidden by default */
+    .nav-list {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: #1B2E4B;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0.5rem 0 1rem;
+      border-top: 2px solid #A67A28;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    /* Open state */
+    .nav-list--open {
+      display: flex;
+    }
+
+    .nav-item {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .nav-link {
+      font-size: 1.05rem;
+      padding: 0.875rem 1.5rem;
+      border-radius: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      letter-spacing: 0.03em;
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.06);
+      color: #A67A28;
+    }
+
+    /* Hide desktop pipe dividers in dropdown */
+    .nav-divider { display: none; }
+  }
+
+  /* ── Small mobile ────────────────────────────────────────────── */
 
   @media (max-width: 640px) {
     .header-town-of { font-size: 1.25rem; }
