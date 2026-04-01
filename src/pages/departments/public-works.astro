@@ -51,13 +51,12 @@ const currentProjects = [
 
 <BaseLayout title="Public Works | Town of Littleton, NH" description="The Public Works Department maintains Littleton's roads, bridges, water systems, and public facilities.">
 
-  <!-- Page Hero -->
   <section class="bg-light-blue py-12" aria-labelledby="hero-heading">
     <div class="max-w-7xl mx-auto px-8">
       <nav aria-label="Breadcrumb" class="mb-4">
         <ol class="flex items-center gap-2 text-sm text-body-text">
           <li>
-            <a href="/departments" class="hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+            <a href="/departments" class="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
               Departments
             </a>
           </li>
@@ -74,7 +73,7 @@ const currentProjects = [
           <svg class="w-5 h-5 text-mid-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
           </svg>
-          <a href="tel:+16035550102" class="hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+          <a href="tel:+16035550102" class="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
             (603) 555-0102
           </a>
         </div>
@@ -82,7 +81,7 @@ const currentProjects = [
           <svg class="w-5 h-5 text-mid-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
           </svg>
-          <a href="mailto:publicworks@littletonnh.gov" class="hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
+          <a href="mailto:publicworks@littletonnh.gov" class="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded">
             publicworks@littletonnh.gov
           </a>
         </div>
@@ -96,7 +95,6 @@ const currentProjects = [
     </div>
   </section>
 
-  <!-- Services Grid -->
   <section class="bg-white py-16" aria-labelledby="services-heading">
     <div class="max-w-7xl mx-auto px-8">
       <h2 id="services-heading" class="text-3xl font-bold text-navy text-center mb-12">Our Services</h2>
@@ -123,7 +121,6 @@ const currentProjects = [
     </div>
   </section>
 
-  <!-- Report a Problem + Current Projects -->
   <section class="bg-light-blue py-16" aria-labelledby="report-section-heading">
     <h2 id="report-section-heading" class="sr-only">Report a Problem and Current Projects</h2>
     <div class="report-grid">
@@ -156,7 +153,7 @@ const currentProjects = [
         <ul class="space-y-4">
           {currentProjects.map((project) => (
             <li class="bg-white p-4 rounded-lg flex items-center justify-between">
-              <span class="text-body-text font-medium">{project.name}</span>
+              <span class="text-navy font-medium">{project.name}</span>
               <span class={`status-badge ${project.statusClass}`}>
                 {project.status}
               </span>
@@ -167,28 +164,27 @@ const currentProjects = [
     </div>
   </section>
 
-  <!-- Winter Services — gold on navy passes contrast, left as-is -->
   <section class="bg-navy py-16" aria-labelledby="winter-heading">
     <div class="max-w-7xl mx-auto px-8">
       <h2 id="winter-heading" class="text-3xl font-bold text-white text-center mb-10">Winter Services</h2>
       <div class="winter-grid">
         <div class="winter-card">
           <h3 class="text-xl font-semibold text-white mb-3">Snow Routes</h3>
-          <p class="text-gray-200">
+          <p class="winter-text">
             Priority roads are treated first. View the snow route map to see when your street will be plowed.
           </p>
         </div>
         <div class="winter-card">
           <h3 class="text-xl font-semibold text-white mb-3">Salt &amp; Sand</h3>
-          <p class="text-gray-200">
+          <p class="winter-text">
             We use a salt/sand mix to treat roads during winter storms for optimal traction and ice melt.
           </p>
         </div>
         <div class="winter-card">
           <h3 class="text-xl font-semibold text-white mb-3">Report Issues</h3>
-          <p class="text-gray-200">
+          <p class="winter-text">
             Roads still icy? Call us at
-            <a href="tel:+16035550102" class="text-gold hover:underline focus:outline-none focus:ring-2 focus:ring-gold rounded">
+            <a href="tel:+16035550102" class="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-gold rounded winter-link">
               (603) 555-0102
             </a>
             to report conditions.
@@ -198,7 +194,6 @@ const currentProjects = [
     </div>
   </section>
 
-  <!-- Hours & Location -->
   <section class="bg-white" aria-labelledby="info-heading">
     <h2 id="info-heading" class="sr-only">Hours and Location</h2>
     <div class="info-grid">
@@ -246,22 +241,21 @@ const currentProjects = [
           <p>Littleton, NH 03561</p>
         </address>
         <div
-          class="bg-gray-200 h-48 rounded-lg flex items-center justify-center"
+          class="map-placeholder h-48 rounded-lg flex items-center justify-center"
           role="img"
           aria-label="Map showing Public Works facility location at 200 Industrial Park Road"
         >
-          <span class="text-body-text" aria-hidden="true">Map Placeholder</span>
+          <span class="map-placeholder-text text-sm" aria-hidden="true">Map Placeholder</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Back to Departments -->
   <section class="bg-light-blue py-8">
     <div class="max-w-7xl mx-auto px-8 text-center">
       <a
         href="/departments"
-        class="inline-flex items-center gap-2 text-navy font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
+        class="inline-flex items-center gap-2 text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -308,13 +302,15 @@ const currentProjects = [
     padding: 24px;
   }
 
-  /* Fixed: navy on white passes 4.5:1 — was text-gold which failed */
   .service-link {
     color: #1B2E4B;
     font-weight: 600;
     text-decoration: underline;
   }
-  .service-link:hover { color: #2C4A7C; }
+  .service-link:hover {
+    text-decoration: none;
+    color: #2C4A7C;
+  }
   .service-link:focus {
     outline: 2px solid #1B2E4B;
     outline-offset: 2px;
@@ -350,6 +346,14 @@ const currentProjects = [
     padding: 24px;
   }
 
+  .winter-text {
+    color: #ffffff;
+  }
+
+  .winter-link {
+    color: #C8973A;
+  }
+
   .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -360,6 +364,14 @@ const currentProjects = [
   }
   @media (max-width: 768px) {
     .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .map-placeholder {
+    background-color: #e5e7eb;
+  }
+
+  .map-placeholder-text {
+    color: #374151;
   }
 
   .status-badge {
