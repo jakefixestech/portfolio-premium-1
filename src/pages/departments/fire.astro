@@ -106,7 +106,7 @@ const safetyTips = [
       <div class="stats-grid">
         {stats.map((stat) => (
           <div class="stat-card">
-            <h3 class="stat-value">{stat.value}</h3>
+            <p class="stat-value">{stat.value}</p>
             <p class="text-white">{stat.label}</p>
           </div>
         ))}
@@ -153,10 +153,9 @@ const safetyTips = [
             <p class="text-body-text mb-4">
               The Littleton Fire Department provides free smoke detectors and installation for residents in need. Contact us to learn if you qualify for this program.
             </p>
-            <!-- Gold on light-blue background passes contrast — kept as gold -->
             <a
               href="tel:+16035550105"
-              class="text-navy font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 rounded"
+              class="text-navy font-semibold underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-navy focus:ring-offset-2 rounded"
               aria-label="Call to learn more about the free smoke detector program"
             >
               Call to Learn More <span aria-hidden="true">→</span>
@@ -208,7 +207,8 @@ const safetyTips = [
           role="img"
           aria-label="Map showing Fire Station location at 50 Union Street, Littleton NH"
         >
-          <span class="text-gray-500" aria-hidden="true">Map Placeholder</span>
+          <!-- Fixed: text-gray-500 → text-gray-700 for contrast on bg-gray-200 -->
+          <span class="text-gray-700" aria-hidden="true">Map Placeholder</span>
         </div>
       </div>
 
@@ -318,11 +318,10 @@ const safetyTips = [
     text-align: center;
   }
 
-  /* h3 styled as large gold number — !important overrides any inherited text-navy */
   .stat-value {
     font-size: 2.25rem;
     font-weight: 700;
-    color: #C8973A !important;
+    color: #C8973A;
     margin-bottom: 0.5rem;
     line-height: 1;
   }
