@@ -172,7 +172,6 @@ const steps = [
       <div class="steps-grid">
         {steps.map((step) => (
           <div class="bg-white rounded-lg p-6 text-center shadow-sm">
-            <!-- Fixed: was text-gold on white (fails) — now navy on white (passes) -->
             <span class="text-5xl font-bold text-navy mb-4 block" aria-hidden="true">{step.number}</span>
             <h3 class="text-xl font-semibold text-navy mb-2">{step.title}</h3>
             <p class="text-body-text">{step.description}</p>
@@ -288,7 +287,8 @@ const steps = [
           role="img"
           aria-label="Map showing Planning and Zoning office location at 125 Main Street"
         >
-          <span class="text-gray-500" aria-hidden="true">Map Placeholder</span>
+          <!-- Fixed: text-gray-500 → text-gray-700 for contrast on bg-gray-200 -->
+          <span class="text-gray-700" aria-hidden="true">Map Placeholder</span>
         </div>
       </div>
     </div>
@@ -347,7 +347,6 @@ const steps = [
     padding: 24px;
   }
 
-  /* Fixed: navy on white — passes 4.5:1 */
   .service-link {
     color: #1B2E4B;
     font-weight: 600;
@@ -360,7 +359,6 @@ const steps = [
     border-radius: 2px;
   }
 
-  /* Fixed: navy on light-blue — passes 4.5:1 */
   .meeting-link {
     display: inline-block;
     margin-top: 1rem;
