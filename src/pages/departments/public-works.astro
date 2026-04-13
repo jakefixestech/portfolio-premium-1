@@ -184,7 +184,8 @@ const currentProjects = [
           <h3 class="text-xl font-semibold text-white mb-3">Report Issues</h3>
           <p class="winter-text">
             Roads still icy? Call us at
-            <a href="tel:+16035550102" class="underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-gold rounded winter-link">
+            <!-- Fixed: color changed from gold #C8973A to white for contrast on navy background -->
+            <a href="tel:+16035550102" class="winter-link underline hover:no-underline focus:outline-none focus:ring-2 focus:ring-white rounded">
               (603) 555-0102
             </a>
             to report conditions.
@@ -350,8 +351,9 @@ const currentProjects = [
     color: #ffffff;
   }
 
+  /* Fixed: color changed from #C8973A (gold) to white for contrast on navy */
   .winter-link {
-    color: #C8973A;
+    color: white;
   }
 
   .info-grid {
