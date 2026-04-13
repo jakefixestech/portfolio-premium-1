@@ -245,7 +245,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           role="img"
           aria-label="Map showing Littleton Police Department location at 75 Cottage Street"
         >
-          <span class="text-gray-500" aria-hidden="true">Map Placeholder</span>
+          <!-- Fixed: text-gray-500 → text-gray-700 for contrast on bg-gray-200 -->
+          <span class="text-gray-700" aria-hidden="true">Map Placeholder</span>
         </div>
       </div>
     </div>
@@ -349,7 +350,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     border-top: 4px solid #2C4A7C;
   }
 
-  /* Fixed: navy on white passes 4.5:1 — was text-gold on white which failed */
   .program-link {
     color: #1B2E4B;
     font-weight: 600;
@@ -380,7 +380,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     text-align: center;
   }
 
-  /* Gold on navy — passes contrast fine, left unchanged */
   .number-link {
     font-size: 1.5rem;
     font-weight: 700;
