@@ -230,7 +230,6 @@ const publicNotices = [
     background-color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
-  /* Fixed: navy on gold passes contrast — was white which failed */
   .featured-badge {
     display: inline-block;
     background-color: #C8973A;
@@ -259,7 +258,6 @@ const publicNotices = [
     margin-bottom: 1.5rem;
   }
 
-  /* Fixed: navy on white/light passes 4.5:1 — was gold which failed */
   .read-more-link {
     color: #1B2E4B;
     font-weight: 600;
@@ -394,11 +392,13 @@ const publicNotices = [
     display: flex;
     gap: 0.75rem;
   }
-  /* Fixed: gold border makes input stand out against navy background */
+  /* Fixed: added background-color white so input text passes contrast on navy background */
   .newsletter-input {
     flex: 1;
     padding: 0.75rem 1rem;
     font-size: 1rem;
+    background-color: white;
+    color: #1B2E4B;
     border: 2px solid #C8973A;
     border-radius: 4px;
   }
@@ -406,7 +406,6 @@ const publicNotices = [
     outline: none;
     border-color: white;
   }
-  /* Fixed: navy text on gold passes contrast — was white which failed */
   .newsletter-button {
     background-color: #C8973A;
     color: #1B2E4B;
