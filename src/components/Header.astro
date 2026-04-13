@@ -18,7 +18,6 @@ const navItems = [
   <div class="header-top">
     <div class="max-w-7xl mx-auto px-4 py-6">
       <div class="text-center">
-        <!-- Fixed: wrapped in link pointing to home -->
         <a href="/" class="header-home-link" aria-label="Town of Littleton, NH - Home">
           <p class="header-title">
             <span class="header-town-of">Town of</span>
@@ -61,6 +60,27 @@ const navItems = [
             )}
           </li>
         ))}
+
+        <!-- Search form — inline on desktop, stacked on mobile -->
+        <li class="nav-item nav-search-item" role="none">
+          <form action="/search" method="get" role="search" class="nav-search-form">
+            <label for="nav-search" class="sr-only">Search Town of Littleton</label>
+            <input
+              type="search"
+              id="nav-search"
+              name="q"
+              placeholder="Search..."
+              autocomplete="off"
+              class="nav-search-input"
+            />
+            <button type="submit" class="nav-search-btn" aria-label="Submit search">
+              <svg class="w-4 h-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+              </svg>
+            </button>
+          </form>
+        </li>
       </ul>
 
     </div>
@@ -106,8 +126,6 @@ const navItems = [
 </script>
 
 <style>
-  /* ── Metric-matched fallback fonts (prevents CLS on font swap) ── */
-
   @font-face {
     font-family: 'Playfair-Fallback';
     src: local('Georgia');
@@ -126,7 +144,17 @@ const navItems = [
     line-gap-override: 0%;
   }
 
-  /* ── Skip link ───────────────────────────────────────────────── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 
   .skip-link {
     position: absolute;
@@ -141,8 +169,6 @@ const navItems = [
   }
   .skip-link:focus { top: 0; }
 
-  /* ── Header shell ────────────────────────────────────────────── */
-
   .site-header {
     background: white;
     border-bottom: 3px solid #A67A28;
@@ -153,24 +179,18 @@ const navItems = [
     border-bottom: 1px solid #e5e7eb;
   }
 
-  /* ── Home link wrapper ───────────────────────────────────────── */
-
   .header-home-link {
     display: inline-block;
     text-decoration: none;
     border-radius: 4px;
   }
-
   .header-home-link:focus {
     outline: 2px solid #A67A28;
     outline-offset: 4px;
   }
-
   .header-home-link:hover .header-littleton {
     opacity: 0.85;
   }
-
-  /* ── Wordmark ────────────────────────────────────────────────── */
 
   .header-title {
     font-family: 'Playfair Display', 'Playfair-Fallback', Georgia, serif;
@@ -207,8 +227,6 @@ const navItems = [
     font-weight: 400;
   }
 
-  /* ── Nav bar ─────────────────────────────────────────────────── */
-
   .header-nav {
     background: #1B2E4B;
     position: relative;
@@ -221,8 +239,6 @@ const navItems = [
     min-height: 48px;
   }
 
-  /* ── Desktop nav list ────────────────────────────────────────── */
-
   .nav-list {
     display: flex;
     flex-wrap: nowrap;
@@ -230,7 +246,7 @@ const navItems = [
     align-items: center;
     list-style: none;
     margin: 0;
-    padding: 0.5rem 0;
+    padding: 0.375rem 0;
     gap: 0;
   }
 
@@ -263,11 +279,64 @@ const navItems = [
     user-select: none;
   }
 
-  /* Hamburger hidden on desktop */
+  /* Search form in nav */
+  .nav-search-item {
+    margin-left: 0.75rem;
+  }
+
+  .nav-search-form {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .nav-search-form:focus-within {
+    border-color: #A67A28;
+    background: rgba(255,255,255,0.18);
+  }
+
+  .nav-search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: 'Source Serif 4', 'SourceSerif-Fallback', Georgia, serif;
+    font-size: 0.9rem;
+    padding: 0.375rem 0.625rem;
+    width: 130px;
+    transition: width 0.2s;
+  }
+  .nav-search-input::placeholder {
+    color: rgba(255,255,255,0.55);
+  }
+  .nav-search-input:focus {
+    width: 180px;
+  }
+
+  .nav-search-btn {
+    background: #A67A28;
+    border: none;
+    color: white;
+    padding: 0.375rem 0.625rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    height: 100%;
+  }
+  .nav-search-btn:hover { background: #8a6420; }
+  .nav-search-btn:focus {
+    outline: 2px solid white;
+    outline-offset: -2px;
+  }
+
   .nav-toggle { display: none; }
 
   /* ── Mobile / Tablet ≤900px ──────────────────────────────────── */
-
   @media (max-width: 900px) {
 
     .nav-inner {
@@ -346,9 +415,7 @@ const navItems = [
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     }
 
-    .nav-list--open {
-      display: flex;
-    }
+    .nav-list--open { display: flex; }
 
     .nav-item {
       flex-direction: column;
@@ -368,9 +435,31 @@ const navItems = [
     }
 
     .nav-divider { display: none; }
-  }
 
-  /* ── Small mobile ────────────────────────────────────────────── */
+    /* Search on mobile — full width in dropdown */
+    .nav-search-item {
+      margin-left: 0;
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-search-form {
+      width: 100%;
+    }
+
+    .nav-search-input {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.5rem 0.75rem;
+    }
+    .nav-search-input:focus {
+      width: 100%;
+    }
+
+    .nav-search-btn {
+      padding: 0.5rem 0.875rem;
+    }
+  }
 
   @media (max-width: 640px) {
     .header-town-of { font-size: 1.25rem; }
