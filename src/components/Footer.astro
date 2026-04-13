@@ -24,7 +24,8 @@ const officeHours = [
 
       <!-- Town Info -->
       <div>
-        <h3 class="footer-heading">Town of Littleton</h3>
+        <!-- Fixed: h3 → h2 to avoid skipped heading levels on pages with only h1 -->
+        <h2 class="footer-heading">Town of Littleton</h2>
         <address class="not-italic text-sm leading-relaxed footer-text">
           125 Main Street<br />
           Littleton, NH 03561<br /><br />
@@ -39,7 +40,8 @@ const officeHours = [
 
       <!-- Quick Links -->
       <div>
-        <h3 class="footer-heading">Quick Links</h3>
+        <!-- Fixed: h3 → h2 -->
+        <h2 class="footer-heading">Quick Links</h2>
         <nav aria-label="Footer navigation">
           <ul class="space-y-2 text-sm">
             {quickLinks.map((link) => (
@@ -55,7 +57,8 @@ const officeHours = [
 
       <!-- Office Hours -->
       <div>
-        <h3 class="footer-heading">Office Hours</h3>
+        <!-- Fixed: h3 → h2 -->
+        <h2 class="footer-heading">Office Hours</h2>
         <ul class="space-y-2 text-sm footer-text">
           {officeHours.map((item) => (
             <li>
