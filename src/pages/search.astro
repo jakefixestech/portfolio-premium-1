@@ -232,7 +232,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // @ts-ignore
       pagefind = await import(/* @vite-ignore */ '/pagefind/pagefind.js');
     } catch {
-      statusEl.innerHTML = '<p style="color:#6b7280;font-size:0.9rem;">Search index not available. Try again on the live site.</p>';
+      statusEl.innerHTML = '<p style="color:#4b5563;font-size:0.9rem;">Search index not available. Try again on the live site.</p>';
       resultsEl.style.minHeight = '0';
       quickLinks.hidden = false;
       return;
@@ -248,8 +248,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div style="text-align:center;padding:3rem 1.5rem;background:white;border:1px solid #e5e7eb;border-radius:0.75rem;margin-bottom:2rem;">
             <span style="font-size:3rem;display:block;margin-bottom:1rem;">🔍</span>
             <h2 style="font-size:1.25rem;font-weight:700;color:#1B2E4B;margin-bottom:0.5rem;">No results for "${query}"</h2>
-            <p style="font-size:0.9rem;color:#6b7280;margin-bottom:1.5rem;">Try a different search term or browse the links below.</p>
-            <a href="/departments" style="display:inline-flex;align-items:center;gap:0.5rem;background:#A67A28;color:white;font-weight:700;padding:0.75rem 1.5rem;border-radius:0.5rem;text-decoration:none;font-size:0.9rem;">Browse Departments</a>
+            <p style="font-size:0.9rem;color:#4b5563;margin-bottom:1.5rem;">Try a different search term or browse the links below.</p>
+            <a href="/departments" style="display:inline-flex;align-items:center;gap:0.5rem;background:#A67A28;color:#1B2E4B;font-weight:700;padding:0.75rem 1.5rem;border-radius:0.5rem;text-decoration:none;font-size:0.9rem;">Browse Departments</a>
           </div>
         `;
         quickLinks.hidden = false;
@@ -266,7 +266,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
       `).join('');
     } catch (err) {
-      statusEl.innerHTML = '<p style="color:#6b7280;font-size:0.9rem;">Something went wrong. Please try again.</p>';
+      statusEl.innerHTML = '<p style="color:#4b5563;font-size:0.9rem;">Something went wrong. Please try again.</p>';
       resultsEl.style.minHeight = '0';
       quickLinks.hidden = false;
     }
