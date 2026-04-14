@@ -12,6 +12,10 @@ const {
   title = 'Town of Littleton, NH', 
   description = 'Official website of the Town of Littleton, New Hampshire. Nestled in the White Mountains, Littleton is a vibrant community with small-town warmth and year-round adventure.'
 } = Astro.props;
+
+const siteUrl = 'https://premium1.jakefixestech.com';
+const currentPath = Astro.url.pathname;
+const ogImage = `${siteUrl}/hero.webp`;
 ---
 
 <!doctype html>
@@ -22,11 +26,8 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Fixed: display=swap → display=optional to eliminate CLS from font swap -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=optional"
@@ -41,6 +42,21 @@ const {
     </noscript>
 
     <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}${currentPath}`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Town of Littleton, NH" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body class="min-h-screen flex flex-col bg-white">
     <Header />
