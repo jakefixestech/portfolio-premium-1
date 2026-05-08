@@ -14,7 +14,23 @@ const navItems = [
   Skip to main content
 </a>
 
-<header class="site-header">
+<header class="site-header" id="site-header">
+
+  <!-- Demo notice bar — clearly identifies this as a portfolio demo -->
+  <div class="demo-bar" role="region" aria-label="Demo site notice">
+    <div class="demo-bar-inner max-w-7xl mx-auto px-4">
+      <p class="demo-bar-text">
+        <span class="demo-bar-tag">Demo Site</span>
+        <span class="demo-bar-message">
+          Portfolio example built by Jake Fixes Tech. Not affiliated with the Town of Littleton.
+        </span>
+        <a href="https://jakefixestech.com" class="demo-bar-link">
+          Visit jakefixestech.com
+        </a>
+      </p>
+    </div>
+  </div>
+
   <div class="header-top">
     <div class="max-w-7xl mx-auto px-4 py-6">
       <div class="text-center">
@@ -88,6 +104,7 @@ const navItems = [
 </header>
 
 <script>
+  // ── Mobile menu toggle ─────────────────────────────────────────
   const toggle = document.getElementById('nav-toggle');
   const menu   = document.getElementById('nav-menu');
   const label  = document.getElementById('nav-toggle-label');
@@ -121,6 +138,49 @@ const navItems = [
         toggle.classList.remove('nav-toggle--open');
         toggle.focus();
       }
+    });
+  }
+
+  // ── Smart scroll: hide on scroll down, show on scroll up ───────
+  const header = document.getElementById('site-header');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (header && !reduceMotion) {
+    let lastY = window.scrollY;
+    let ticking = false;
+    const threshold = 10;
+
+    const update = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastY;
+
+      // Always show near the top of the page
+      if (currentY < 80) {
+        header.classList.remove('site-header--hidden');
+      } else if (Math.abs(delta) > threshold) {
+        // Don't hide while the mobile menu is open
+        const menuOpen = menu && menu.classList.contains('nav-list--open');
+        if (delta > 0 && !menuOpen) {
+          header.classList.add('site-header--hidden');
+        } else if (delta < 0) {
+          header.classList.remove('site-header--hidden');
+        }
+        lastY = currentY;
+      }
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Reveal the header whenever something inside it receives focus
+    // (keeps the skip link and nav reachable for keyboard users)
+    header.addEventListener('focusin', () => {
+      header.classList.remove('site-header--hidden');
     });
   }
 </script>
@@ -157,22 +217,114 @@ const navItems = [
   }
 
   .skip-link {
-    position: absolute;
+    position: fixed;
     top: -40px;
     left: 0;
     background: #1B2E4B;
     color: white;
     padding: 8px 16px;
-    z-index: 100;
+    z-index: 200;
     text-decoration: none;
     font-weight: 600;
   }
   .skip-link:focus { top: 0; }
 
+  /* ── Demo notice bar ─────────────────────────────────────────── */
+  .demo-bar {
+    background: #1B2E4B;
+    border-bottom: 1px solid #A67A28;
+  }
+
+  .demo-bar-inner {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .demo-bar-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    font-family: 'Source Serif 4', 'SourceSerif-Fallback', Georgia, serif;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.4;
+    margin: 0;
+    text-align: center;
+  }
+
+  .demo-bar-tag {
+    background: #A67A28;
+    color: white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .demo-bar-message {
+    color: rgba(255,255,255,0.92);
+  }
+
+  .demo-bar-link {
+    color: #F0C674;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    border-radius: 3px;
+    padding: 0 2px;
+    transition: color 0.2s;
+  }
+  .demo-bar-link:hover {
+    color: white;
+  }
+  .demo-bar-link:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+    color: white;
+  }
+
+  @media (max-width: 640px) {
+    .demo-bar-inner {
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+    }
+    .demo-bar-text {
+      font-size: 0.8125rem;
+      gap: 0.5rem;
+    }
+    .demo-bar-tag {
+      font-size: 0.6875rem;
+      padding: 0.1875rem 0.5rem;
+    }
+  }
+
+  /* ── Site header ─────────────────────────────────────────────── */
   .site-header {
     background: white;
     border-bottom: 3px solid #A67A28;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: transform 0.28s ease;
+  }
+
+  .site-header--hidden {
+    transform: translateY(-100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
+    }
+    .site-header--hidden {
+      transform: none;
+    }
   }
 
   .header-top {
